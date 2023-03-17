@@ -34,7 +34,7 @@ export class CdkStack extends cdk.Stack {
     const deleteFunction = new lambda.Function(this, "DeleteFunction", {
       runtime: lambda.Runtime.NODEJS_14_X,
       handler: 'index.main',
-      code: lambda.Code.fromInline('console.log("Hello World");'),
+      code: lambda.Code.fromInline('console.log("Hello Worldd");'),
       environment: {
         TABLE: noteTable.tableName,
       },

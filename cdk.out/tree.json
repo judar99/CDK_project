@@ -338,7 +338,7 @@
                   "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                   "aws:cdk:cloudformation:props": {
                     "code": {
-                      "zipFile": "console.log(\"Hello World\");"
+                      "zipFile": "console.log(\"Hello Worldd\");"
                     },
                     "role": {
                       "Fn::GetAtt": [
