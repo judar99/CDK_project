@@ -11,11 +11,6 @@ pool:
 
 steps:
 
-- task: AzurePowerShell@5
-  inputs:
-    ScriptType: 'FilePath'
-    ScriptArguments: 'cdk bootstrap'
-
 - task: CloudFormationCreateOrUpdateStack@1
   inputs:
     awsCredentials: 'awsConnection'
