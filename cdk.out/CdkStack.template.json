@@ -104,7 +104,7 @@
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Code": {
-     "ZipFile": "def main(event, context):\n    print(\"Hello World\")\n"
+     "ZipFile": "def main():\n    print(\"Hello World\")\n"
     },
     "Role": {
      "Fn::GetAtt": [
@@ -215,7 +215,7 @@
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Code": {
-     "ZipFile": "def main(event, context):\n    print(\"Hello World\")\n"
+     "ZipFile": "def main():\n    print(\"Hello World\")\n"
     },
     "Role": {
      "Fn::GetAtt": [
