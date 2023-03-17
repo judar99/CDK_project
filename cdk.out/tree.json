@@ -194,7 +194,7 @@
                       }
                     },
                     "handler": "index.main",
-                    "runtime": "nodejs14.x"
+                    "runtime": "python3.9"
                   }
                 },
                 "constructInfo": {
@@ -354,7 +354,7 @@
                       }
                     },
                     "handler": "index.main",
-                    "runtime": "nodejs14.x"
+                    "runtime": "python3.9"
                   }
                 },
                 "constructInfo": {

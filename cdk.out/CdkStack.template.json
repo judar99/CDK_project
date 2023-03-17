@@ -120,7 +120,7 @@
      }
     },
     "Handler": "index.main",
-    "Runtime": "nodejs14.x"
+    "Runtime": "python3.9"
    },
    "DependsOn": [
     "PostFuntionServiceRoleDefaultPolicy21BD3DD8",
@@ -231,7 +231,7 @@
      }
     },
     "Handler": "index.main",
-    "Runtime": "nodejs14.x"
+    "Runtime": "python3.9"
    },
    "DependsOn": [
     "DeleteFunctionServiceRoleDefaultPolicy702B92CD",
