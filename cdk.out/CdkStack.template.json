@@ -104,7 +104,7 @@
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Code": {
-     "ZipFile": "console.log(\"Hello World\");"
+     "ZipFile": "def main(event, context):\n    print(\"Hello World\")\n"
     },
     "Role": {
      "Fn::GetAtt": [
@@ -120,7 +120,7 @@
      }
     },
     "Handler": "index.main",
-    "Runtime": "nodejs14.x"
+    "Runtime": "python3.7"
    },
    "DependsOn": [
     "PostFuntionServiceRoleDefaultPolicy21BD3DD8",
@@ -215,7 +215,7 @@
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Code": {
-     "ZipFile": "console.log(\"Hello Worldd\");"
+     "ZipFile": "def main(event, context):\n    print(\"Hello World\")\n"
     },
     "Role": {
      "Fn::GetAtt": [
@@ -231,7 +231,7 @@
      }
     },
     "Handler": "index.main",
-    "Runtime": "nodejs14.x"
+    "Runtime": "python3.9"
    },
    "DependsOn": [
     "DeleteFunctionServiceRoleDefaultPolicy702B92CD",
