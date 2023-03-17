@@ -178,7 +178,7 @@
                   "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                   "aws:cdk:cloudformation:props": {
                     "code": {
-                      "zipFile": "def main():\n    print(\"Hello World\")\n"
+                      "zipFile": "def lambdaFuncion(event, context):\n    print(\"Hello World\")\n"
                     },
                     "role": {
                       "Fn::GetAtt": [
@@ -193,7 +193,7 @@
                         }
                       }
                     },
-                    "handler": "index.main",
+                    "handler": "index.lambdaFuncion",
                     "runtime": "python3.7"
                   }
                 },
@@ -338,7 +338,7 @@
                   "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                   "aws:cdk:cloudformation:props": {
                     "code": {
-                      "zipFile": "def main():\n    print(\"Hello World\")\n"
+                      "zipFile": "def lambdaFuncion(event, context):\n    print(\"Hello World\")\n"
                     },
                     "role": {
                       "Fn::GetAtt": [
@@ -353,7 +353,7 @@
                         }
                       }
                     },
-                    "handler": "index.main",
+                    "handler": "index.lambdaFuncion",
                     "runtime": "python3.9"
                   }
                 },
