@@ -19,7 +19,7 @@ steps:
 - task: CloudFormationCreateOrUpdateStack@1
   inputs:
     awsCredentials: 'awsConnection'
-    regionName: 'us-east-2'
+    regionName: 'us-east-1'
     stackName: 'CDK'
     templateSource: 'file'
     templateFile: 'cdk.out/CdkStack.template.json'
