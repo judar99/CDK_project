@@ -75,7 +75,7 @@ export class CdkStack extends cdk.Stack {
     new cloudfront.Distribution(this, 'myDist', {
       defaultBehavior: { 
         origin: new origins.S3Origin(myBucket, {
-          originPath: '/xml',
+          originPath: '/html',
           originAccessIdentity: oai,
         })
       },
