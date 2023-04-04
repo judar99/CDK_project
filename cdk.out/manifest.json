@@ -17,7 +17,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/4168eb25cbfa42eeea8985243370cbfb4a82792a179582f9bcc436130e720af2.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/03474f02fa9990999721bfda0073684b754c9e501547f8684f18beec7c509703.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -33,10 +33,10 @@
         "CdkStack.assets"
       ],
       "metadata": {
-        "/CdkStack/NoteTable/Resource": [
+        "/CdkStack/InventoryTable/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "NoteTable0B067050"
+            "data": "InventoryTableFD135387"
           }
         ],
         "/CdkStack/PostFuntion/ServiceRole/Resource": [
@@ -75,88 +75,88 @@
             "data": "DeleteFunction9052F8B5"
           }
         ],
-        "/CdkStack/helloApi/Resource": [
+        "/CdkStack/InventoryApi/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "helloApiC07BB54E"
+            "data": "InventoryApi49B09E7D"
           }
         ],
-        "/CdkStack/helloApi/Deployment/Resource": [
+        "/CdkStack/InventoryApi/Deployment/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "helloApiDeploymentBA40140340a2531d67b6e44706923b48d7147c70"
+            "data": "InventoryApiDeployment382203FB1397a562cb81c55151465f79303e9f19"
           }
         ],
-        "/CdkStack/helloApi/DeploymentStage.prod/Resource": [
+        "/CdkStack/InventoryApi/DeploymentStage.prod/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "helloApiDeploymentStageprod7750D22A"
+            "data": "InventoryApiDeploymentStageprod5D1FE13B"
           }
         ],
-        "/CdkStack/helloApi/Endpoint": [
+        "/CdkStack/InventoryApi/Endpoint": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "helloApiEndpoint79747C48"
+            "data": "InventoryApiEndpoint825CF96A"
           }
         ],
-        "/CdkStack/helloApi/Default/post/Resource": [
+        "/CdkStack/InventoryApi/Default/post/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "helloApipostB64A2F9F"
+            "data": "InventoryApipostBDC11EB7"
           }
         ],
-        "/CdkStack/helloApi/Default/post/POST/ApiPermission.CdkStackhelloApiEAE07F9B.POST..post": [
+        "/CdkStack/InventoryApi/Default/post/POST/ApiPermission.CdkStackInventoryApiF1A69B73.POST..post": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "helloApipostPOSTApiPermissionCdkStackhelloApiEAE07F9BPOSTpostB1F09208"
+            "data": "InventoryApipostPOSTApiPermissionCdkStackInventoryApiF1A69B73POSTpostE6A61BEF"
           }
         ],
-        "/CdkStack/helloApi/Default/post/POST/ApiPermission.Test.CdkStackhelloApiEAE07F9B.POST..post": [
+        "/CdkStack/InventoryApi/Default/post/POST/ApiPermission.Test.CdkStackInventoryApiF1A69B73.POST..post": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "helloApipostPOSTApiPermissionTestCdkStackhelloApiEAE07F9BPOSTpost34E7E3E6"
+            "data": "InventoryApipostPOSTApiPermissionTestCdkStackInventoryApiF1A69B73POSTpost6BECB927"
           }
         ],
-        "/CdkStack/helloApi/Default/post/POST/Resource": [
+        "/CdkStack/InventoryApi/Default/post/POST/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "helloApipostPOSTFC168888"
+            "data": "InventoryApipostPOST3B9AD72E"
           }
         ],
-        "/CdkStack/helloApi/Default/delete/Resource": [
+        "/CdkStack/InventoryApi/Default/delete/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "helloApidelete049ECA1F"
+            "data": "InventoryApideleteCE0100BE"
           }
         ],
-        "/CdkStack/helloApi/Default/delete/DELETE/ApiPermission.CdkStackhelloApiEAE07F9B.DELETE..delete": [
+        "/CdkStack/InventoryApi/Default/delete/POST/ApiPermission.CdkStackInventoryApiF1A69B73.POST..delete": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "helloApideleteDELETEApiPermissionCdkStackhelloApiEAE07F9BDELETEdeleteBC890C14"
+            "data": "InventoryApideletePOSTApiPermissionCdkStackInventoryApiF1A69B73POSTdeleteCBD37C91"
           }
         ],
-        "/CdkStack/helloApi/Default/delete/DELETE/ApiPermission.Test.CdkStackhelloApiEAE07F9B.DELETE..delete": [
+        "/CdkStack/InventoryApi/Default/delete/POST/ApiPermission.Test.CdkStackInventoryApiF1A69B73.POST..delete": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "helloApideleteDELETEApiPermissionTestCdkStackhelloApiEAE07F9BDELETEdelete06B90365"
+            "data": "InventoryApideletePOSTApiPermissionTestCdkStackInventoryApiF1A69B73POSTdelete386AF91F"
           }
         ],
-        "/CdkStack/helloApi/Default/delete/DELETE/Resource": [
+        "/CdkStack/InventoryApi/Default/delete/POST/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "helloApideleteDELETE81DB68CE"
+            "data": "InventoryApideletePOSTC12CA7D6"
           }
         ],
-        "/CdkStack/myBucket/Resource": [
+        "/CdkStack/inventoryBucket/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "myBucket5AF9C99B"
+            "data": "inventoryBucketA35F81F0"
           }
         ],
-        "/CdkStack/myBucket/Policy/Resource": [
+        "/CdkStack/inventoryBucket/Policy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "myBucketPolicyDAC36B74"
+            "data": "inventoryBucketPolicyF703A301"
           }
         ],
         "/CdkStack/myOAI/Resource": [
@@ -165,10 +165,10 @@
             "data": "myOAI726DB750"
           }
         ],
-        "/CdkStack/myDist/Resource": [
+        "/CdkStack/inventoryFront/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "myDist9DB766F3"
+            "data": "inventoryFront9AE85105"
           }
         ],
         "/CdkStack/CDKMetadata/Default": [

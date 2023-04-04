@@ -8,13 +8,13 @@
         "id": "CdkStack",
         "path": "CdkStack",
         "children": {
-          "NoteTable": {
-            "id": "NoteTable",
-            "path": "CdkStack/NoteTable",
+          "InventoryTable": {
+            "id": "InventoryTable",
+            "path": "CdkStack/InventoryTable",
             "children": {
               "Resource": {
                 "id": "Resource",
-                "path": "CdkStack/NoteTable/Resource",
+                "path": "CdkStack/InventoryTable/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
                   "aws:cdk:cloudformation:props": {
@@ -43,7 +43,7 @@
               },
               "ScalingRole": {
                 "id": "ScalingRole",
-                "path": "CdkStack/NoteTable/ScalingRole",
+                "path": "CdkStack/InventoryTable/ScalingRole",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.Resource",
                   "version": "2.69.0"
@@ -134,7 +134,22 @@
                                   "Resource": [
                                     {
                                       "Fn::GetAtt": [
-                                        "NoteTable0B067050",
+                                        "InventoryTableFD135387",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Ref": "AWS::NoValue"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "Action": "dynamodb:Scan",
+                                  "Effect": "Allow",
+                                  "Resource": [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "InventoryTableFD135387",
                                         "Arn"
                                       ]
                                     },
@@ -178,7 +193,7 @@
                   "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                   "aws:cdk:cloudformation:props": {
                     "code": {
-                      "zipFile": "def lambdaFuncion(event, context):\n    print(\"Hello World\")\n"
+                      "zipFile": "def lambdaFuncion(event, context):\n    print(\"Hello World post\")\n"
                     },
                     "role": {
                       "Fn::GetAtt": [
@@ -189,7 +204,7 @@
                     "environment": {
                       "variables": {
                         "TABLE": {
-                          "Ref": "NoteTable0B067050"
+                          "Ref": "InventoryTableFD135387"
                         }
                       }
                     },
@@ -294,7 +309,7 @@
                                   "Resource": [
                                     {
                                       "Fn::GetAtt": [
-                                        "NoteTable0B067050",
+                                        "InventoryTableFD135387",
                                         "Arn"
                                       ]
                                     },
@@ -338,7 +353,7 @@
                   "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                   "aws:cdk:cloudformation:props": {
                     "code": {
-                      "zipFile": "def lambdaFuncion(event, context):\n    print(\"Hello World\")\n"
+                      "zipFile": "def lambdaFuncion(event, context):\n    print(\"Hello World delete\")\n"
                     },
                     "role": {
                       "Fn::GetAtt": [
@@ -349,7 +364,7 @@
                     "environment": {
                       "variables": {
                         "TABLE": {
-                          "Ref": "NoteTable0B067050"
+                          "Ref": "InventoryTableFD135387"
                         }
                       }
                     },
@@ -368,17 +383,17 @@
               "version": "2.69.0"
             }
           },
-          "helloApi": {
-            "id": "helloApi",
-            "path": "CdkStack/helloApi",
+          "InventoryApi": {
+            "id": "InventoryApi",
+            "path": "CdkStack/InventoryApi",
             "children": {
               "Resource": {
                 "id": "Resource",
-                "path": "CdkStack/helloApi/Resource",
+                "path": "CdkStack/InventoryApi/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::ApiGateway::RestApi",
                   "aws:cdk:cloudformation:props": {
-                    "name": "helloApi"
+                    "name": "InventoryApi"
                   }
                 },
                 "constructInfo": {
@@ -388,16 +403,16 @@
               },
               "Deployment": {
                 "id": "Deployment",
-                "path": "CdkStack/helloApi/Deployment",
+                "path": "CdkStack/InventoryApi/Deployment",
                 "children": {
                   "Resource": {
                     "id": "Resource",
-                    "path": "CdkStack/helloApi/Deployment/Resource",
+                    "path": "CdkStack/InventoryApi/Deployment/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::ApiGateway::Deployment",
                       "aws:cdk:cloudformation:props": {
                         "restApiId": {
-                          "Ref": "helloApiC07BB54E"
+                          "Ref": "InventoryApi49B09E7D"
                         },
                         "description": "Automatically created by the RestApi construct"
                       }
@@ -415,19 +430,19 @@
               },
               "DeploymentStage.prod": {
                 "id": "DeploymentStage.prod",
-                "path": "CdkStack/helloApi/DeploymentStage.prod",
+                "path": "CdkStack/InventoryApi/DeploymentStage.prod",
                 "children": {
                   "Resource": {
                     "id": "Resource",
-                    "path": "CdkStack/helloApi/DeploymentStage.prod/Resource",
+                    "path": "CdkStack/InventoryApi/DeploymentStage.prod/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::ApiGateway::Stage",
                       "aws:cdk:cloudformation:props": {
                         "restApiId": {
-                          "Ref": "helloApiC07BB54E"
+                          "Ref": "InventoryApi49B09E7D"
                         },
                         "deploymentId": {
-                          "Ref": "helloApiDeploymentBA40140340a2531d67b6e44706923b48d7147c70"
+                          "Ref": "InventoryApiDeployment382203FB1397a562cb81c55151465f79303e9f19"
                         },
                         "stageName": "prod"
                       }
@@ -445,7 +460,7 @@
               },
               "Endpoint": {
                 "id": "Endpoint",
-                "path": "CdkStack/helloApi/Endpoint",
+                "path": "CdkStack/InventoryApi/Endpoint",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnOutput",
                   "version": "2.69.0"
@@ -453,27 +468,27 @@
               },
               "Default": {
                 "id": "Default",
-                "path": "CdkStack/helloApi/Default",
+                "path": "CdkStack/InventoryApi/Default",
                 "children": {
                   "post": {
                     "id": "post",
-                    "path": "CdkStack/helloApi/Default/post",
+                    "path": "CdkStack/InventoryApi/Default/post",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "CdkStack/helloApi/Default/post/Resource",
+                        "path": "CdkStack/InventoryApi/Default/post/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::ApiGateway::Resource",
                           "aws:cdk:cloudformation:props": {
                             "parentId": {
                               "Fn::GetAtt": [
-                                "helloApiC07BB54E",
+                                "InventoryApi49B09E7D",
                                 "RootResourceId"
                               ]
                             },
                             "pathPart": "post",
                             "restApiId": {
-                              "Ref": "helloApiC07BB54E"
+                              "Ref": "InventoryApi49B09E7D"
                             }
                           }
                         },
@@ -484,11 +499,11 @@
                       },
                       "POST": {
                         "id": "POST",
-                        "path": "CdkStack/helloApi/Default/post/POST",
+                        "path": "CdkStack/InventoryApi/Default/post/POST",
                         "children": {
-                          "ApiPermission.CdkStackhelloApiEAE07F9B.POST..post": {
-                            "id": "ApiPermission.CdkStackhelloApiEAE07F9B.POST..post",
-                            "path": "CdkStack/helloApi/Default/post/POST/ApiPermission.CdkStackhelloApiEAE07F9B.POST..post",
+                          "ApiPermission.CdkStackInventoryApiF1A69B73.POST..post": {
+                            "id": "ApiPermission.CdkStackInventoryApiF1A69B73.POST..post",
+                            "path": "CdkStack/InventoryApi/Default/post/POST/ApiPermission.CdkStackInventoryApiF1A69B73.POST..post",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
                               "aws:cdk:cloudformation:props": {
@@ -518,11 +533,11 @@
                                       },
                                       ":",
                                       {
-                                        "Ref": "helloApiC07BB54E"
+                                        "Ref": "InventoryApi49B09E7D"
                                       },
                                       "/",
                                       {
-                                        "Ref": "helloApiDeploymentStageprod7750D22A"
+                                        "Ref": "InventoryApiDeploymentStageprod5D1FE13B"
                                       },
                                       "/POST/post"
                                     ]
@@ -535,9 +550,9 @@
                               "version": "2.69.0"
                             }
                           },
-                          "ApiPermission.Test.CdkStackhelloApiEAE07F9B.POST..post": {
-                            "id": "ApiPermission.Test.CdkStackhelloApiEAE07F9B.POST..post",
-                            "path": "CdkStack/helloApi/Default/post/POST/ApiPermission.Test.CdkStackhelloApiEAE07F9B.POST..post",
+                          "ApiPermission.Test.CdkStackInventoryApiF1A69B73.POST..post": {
+                            "id": "ApiPermission.Test.CdkStackInventoryApiF1A69B73.POST..post",
+                            "path": "CdkStack/InventoryApi/Default/post/POST/ApiPermission.Test.CdkStackInventoryApiF1A69B73.POST..post",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
                               "aws:cdk:cloudformation:props": {
@@ -567,7 +582,7 @@
                                       },
                                       ":",
                                       {
-                                        "Ref": "helloApiC07BB54E"
+                                        "Ref": "InventoryApi49B09E7D"
                                       },
                                       "/test-invoke-stage/POST/post"
                                     ]
@@ -582,16 +597,16 @@
                           },
                           "Resource": {
                             "id": "Resource",
-                            "path": "CdkStack/helloApi/Default/post/POST/Resource",
+                            "path": "CdkStack/InventoryApi/Default/post/POST/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
                               "aws:cdk:cloudformation:props": {
                                 "httpMethod": "POST",
                                 "resourceId": {
-                                  "Ref": "helloApipostB64A2F9F"
+                                  "Ref": "InventoryApipostBDC11EB7"
                                 },
                                 "restApiId": {
-                                  "Ref": "helloApiC07BB54E"
+                                  "Ref": "InventoryApi49B09E7D"
                                 },
                                 "authorizationType": "NONE",
                                 "integration": {
@@ -642,23 +657,23 @@
                   },
                   "delete": {
                     "id": "delete",
-                    "path": "CdkStack/helloApi/Default/delete",
+                    "path": "CdkStack/InventoryApi/Default/delete",
                     "children": {
                       "Resource": {
                         "id": "Resource",
-                        "path": "CdkStack/helloApi/Default/delete/Resource",
+                        "path": "CdkStack/InventoryApi/Default/delete/Resource",
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::ApiGateway::Resource",
                           "aws:cdk:cloudformation:props": {
                             "parentId": {
                               "Fn::GetAtt": [
-                                "helloApiC07BB54E",
+                                "InventoryApi49B09E7D",
                                 "RootResourceId"
                               ]
                             },
                             "pathPart": "delete",
                             "restApiId": {
-                              "Ref": "helloApiC07BB54E"
+                              "Ref": "InventoryApi49B09E7D"
                             }
                           }
                         },
@@ -667,13 +682,13 @@
                           "version": "2.69.0"
                         }
                       },
-                      "DELETE": {
-                        "id": "DELETE",
-                        "path": "CdkStack/helloApi/Default/delete/DELETE",
+                      "POST": {
+                        "id": "POST",
+                        "path": "CdkStack/InventoryApi/Default/delete/POST",
                         "children": {
-                          "ApiPermission.CdkStackhelloApiEAE07F9B.DELETE..delete": {
-                            "id": "ApiPermission.CdkStackhelloApiEAE07F9B.DELETE..delete",
-                            "path": "CdkStack/helloApi/Default/delete/DELETE/ApiPermission.CdkStackhelloApiEAE07F9B.DELETE..delete",
+                          "ApiPermission.CdkStackInventoryApiF1A69B73.POST..delete": {
+                            "id": "ApiPermission.CdkStackInventoryApiF1A69B73.POST..delete",
+                            "path": "CdkStack/InventoryApi/Default/delete/POST/ApiPermission.CdkStackInventoryApiF1A69B73.POST..delete",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
                               "aws:cdk:cloudformation:props": {
@@ -703,13 +718,13 @@
                                       },
                                       ":",
                                       {
-                                        "Ref": "helloApiC07BB54E"
+                                        "Ref": "InventoryApi49B09E7D"
                                       },
                                       "/",
                                       {
-                                        "Ref": "helloApiDeploymentStageprod7750D22A"
+                                        "Ref": "InventoryApiDeploymentStageprod5D1FE13B"
                                       },
-                                      "/DELETE/delete"
+                                      "/POST/delete"
                                     ]
                                   ]
                                 }
@@ -720,9 +735,9 @@
                               "version": "2.69.0"
                             }
                           },
-                          "ApiPermission.Test.CdkStackhelloApiEAE07F9B.DELETE..delete": {
-                            "id": "ApiPermission.Test.CdkStackhelloApiEAE07F9B.DELETE..delete",
-                            "path": "CdkStack/helloApi/Default/delete/DELETE/ApiPermission.Test.CdkStackhelloApiEAE07F9B.DELETE..delete",
+                          "ApiPermission.Test.CdkStackInventoryApiF1A69B73.POST..delete": {
+                            "id": "ApiPermission.Test.CdkStackInventoryApiF1A69B73.POST..delete",
+                            "path": "CdkStack/InventoryApi/Default/delete/POST/ApiPermission.Test.CdkStackInventoryApiF1A69B73.POST..delete",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
                               "aws:cdk:cloudformation:props": {
@@ -752,9 +767,9 @@
                                       },
                                       ":",
                                       {
-                                        "Ref": "helloApiC07BB54E"
+                                        "Ref": "InventoryApi49B09E7D"
                                       },
-                                      "/test-invoke-stage/DELETE/delete"
+                                      "/test-invoke-stage/POST/delete"
                                     ]
                                   ]
                                 }
@@ -767,16 +782,16 @@
                           },
                           "Resource": {
                             "id": "Resource",
-                            "path": "CdkStack/helloApi/Default/delete/DELETE/Resource",
+                            "path": "CdkStack/InventoryApi/Default/delete/POST/Resource",
                             "attributes": {
                               "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
                               "aws:cdk:cloudformation:props": {
-                                "httpMethod": "DELETE",
+                                "httpMethod": "POST",
                                 "resourceId": {
-                                  "Ref": "helloApidelete049ECA1F"
+                                  "Ref": "InventoryApideleteCE0100BE"
                                 },
                                 "restApiId": {
-                                  "Ref": "helloApiC07BB54E"
+                                  "Ref": "InventoryApi49B09E7D"
                                 },
                                 "authorizationType": "NONE",
                                 "integration": {
@@ -837,13 +852,13 @@
               "version": "2.69.0"
             }
           },
-          "myBucket": {
-            "id": "myBucket",
-            "path": "CdkStack/myBucket",
+          "inventoryBucket": {
+            "id": "inventoryBucket",
+            "path": "CdkStack/inventoryBucket",
             "children": {
               "Resource": {
                 "id": "Resource",
-                "path": "CdkStack/myBucket/Resource",
+                "path": "CdkStack/inventoryBucket/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
                   "aws:cdk:cloudformation:props": {}
@@ -855,16 +870,16 @@
               },
               "Policy": {
                 "id": "Policy",
-                "path": "CdkStack/myBucket/Policy",
+                "path": "CdkStack/inventoryBucket/Policy",
                 "children": {
                   "Resource": {
                     "id": "Resource",
-                    "path": "CdkStack/myBucket/Policy/Resource",
+                    "path": "CdkStack/inventoryBucket/Policy/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::S3::BucketPolicy",
                       "aws:cdk:cloudformation:props": {
                         "bucket": {
-                          "Ref": "myBucket5AF9C99B"
+                          "Ref": "inventoryBucketA35F81F0"
                         },
                         "policyDocument": {
                           "Statement": [
@@ -886,7 +901,7 @@
                                   [
                                     {
                                       "Fn::GetAtt": [
-                                        "myBucket5AF9C99B",
+                                        "inventoryBucketA35F81F0",
                                         "Arn"
                                       ]
                                     },
@@ -943,13 +958,13 @@
               "version": "2.69.0"
             }
           },
-          "myDist": {
-            "id": "myDist",
-            "path": "CdkStack/myDist",
+          "inventoryFront": {
+            "id": "inventoryFront",
+            "path": "CdkStack/inventoryFront",
             "children": {
               "Origin1": {
                 "id": "Origin1",
-                "path": "CdkStack/myDist/Origin1",
+                "path": "CdkStack/inventoryFront/Origin1",
                 "constructInfo": {
                   "fqn": "constructs.Construct",
                   "version": "10.1.280"
@@ -957,7 +972,7 @@
               },
               "Resource": {
                 "id": "Resource",
-                "path": "CdkStack/myDist/Resource",
+                "path": "CdkStack/inventoryFront/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::CloudFront::Distribution",
                   "aws:cdk:cloudformation:props": {
@@ -967,12 +982,12 @@
                         {
                           "domainName": {
                             "Fn::GetAtt": [
-                              "myBucket5AF9C99B",
+                              "inventoryBucketA35F81F0",
                               "RegionalDomainName"
                             ]
                           },
-                          "id": "CdkStackmyDistOrigin14259FED5",
-                          "originPath": "/xml",
+                          "id": "CdkStackinventoryFrontOrigin110573FEE",
+                          "originPath": "/html",
                           "s3OriginConfig": {
                             "originAccessIdentity": {
                               "Fn::Join": [
@@ -990,7 +1005,7 @@
                       ],
                       "defaultCacheBehavior": {
                         "pathPattern": "*",
-                        "targetOriginId": "CdkStackmyDistOrigin14259FED5",
+                        "targetOriginId": "CdkStackinventoryFrontOrigin110573FEE",
                         "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
                         "compress": true,
                         "viewerProtocolPolicy": "allow-all"

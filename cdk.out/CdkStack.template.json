@@ -1,6 +1,6 @@
 {
  "Resources": {
-  "NoteTable0B067050": {
+  "InventoryTableFD135387": {
    "Type": "AWS::DynamoDB::Table",
    "Properties": {
     "KeySchema": [
@@ -23,7 +23,7 @@
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain",
    "Metadata": {
-    "aws:cdk:path": "CdkStack/NoteTable/Resource"
+    "aws:cdk:path": "CdkStack/InventoryTable/Resource"
    }
   },
   "PostFuntionServiceRoleDE2DD496": {
@@ -77,7 +77,22 @@
        "Resource": [
         {
          "Fn::GetAtt": [
-          "NoteTable0B067050",
+          "InventoryTableFD135387",
+          "Arn"
+         ]
+        },
+        {
+         "Ref": "AWS::NoValue"
+        }
+       ]
+      },
+      {
+       "Action": "dynamodb:Scan",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "InventoryTableFD135387",
           "Arn"
          ]
         },
@@ -104,7 +119,7 @@
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Code": {
-     "ZipFile": "def lambdaFuncion(event, context):\n    print(\"Hello World\")\n"
+     "ZipFile": "def lambdaFuncion(event, context):\n    print(\"Hello World post\")\n"
     },
     "Role": {
      "Fn::GetAtt": [
@@ -115,7 +130,7 @@
     "Environment": {
      "Variables": {
       "TABLE": {
-       "Ref": "NoteTable0B067050"
+       "Ref": "InventoryTableFD135387"
       }
      }
     },
@@ -188,7 +203,7 @@
        "Resource": [
         {
          "Fn::GetAtt": [
-          "NoteTable0B067050",
+          "InventoryTableFD135387",
           "Arn"
          ]
         },
@@ -215,7 +230,7 @@
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Code": {
-     "ZipFile": "def lambdaFuncion(event, context):\n    print(\"Hello World\")\n"
+     "ZipFile": "def lambdaFuncion(event, context):\n    print(\"Hello World delete\")\n"
     },
     "Role": {
      "Fn::GetAtt": [
@@ -226,7 +241,7 @@
     "Environment": {
      "Variables": {
       "TABLE": {
-       "Ref": "NoteTable0B067050"
+       "Ref": "InventoryTableFD135387"
       }
      }
     },
@@ -241,67 +256,67 @@
     "aws:cdk:path": "CdkStack/DeleteFunction/Resource"
    }
   },
-  "helloApiC07BB54E": {
+  "InventoryApi49B09E7D": {
    "Type": "AWS::ApiGateway::RestApi",
    "Properties": {
-    "Name": "helloApi"
+    "Name": "InventoryApi"
    },
    "Metadata": {
-    "aws:cdk:path": "CdkStack/helloApi/Resource"
+    "aws:cdk:path": "CdkStack/InventoryApi/Resource"
    }
   },
-  "helloApiDeploymentBA40140340a2531d67b6e44706923b48d7147c70": {
+  "InventoryApiDeployment382203FB1397a562cb81c55151465f79303e9f19": {
    "Type": "AWS::ApiGateway::Deployment",
    "Properties": {
     "RestApiId": {
-     "Ref": "helloApiC07BB54E"
+     "Ref": "InventoryApi49B09E7D"
     },
     "Description": "Automatically created by the RestApi construct"
    },
    "DependsOn": [
-    "helloApideleteDELETE81DB68CE",
-    "helloApidelete049ECA1F",
-    "helloApipostPOSTFC168888",
-    "helloApipostB64A2F9F"
+    "InventoryApideletePOSTC12CA7D6",
+    "InventoryApideleteCE0100BE",
+    "InventoryApipostPOST3B9AD72E",
+    "InventoryApipostBDC11EB7"
    ],
    "Metadata": {
-    "aws:cdk:path": "CdkStack/helloApi/Deployment/Resource"
+    "aws:cdk:path": "CdkStack/InventoryApi/Deployment/Resource"
    }
   },
-  "helloApiDeploymentStageprod7750D22A": {
+  "InventoryApiDeploymentStageprod5D1FE13B": {
    "Type": "AWS::ApiGateway::Stage",
    "Properties": {
     "RestApiId": {
-     "Ref": "helloApiC07BB54E"
+     "Ref": "InventoryApi49B09E7D"
     },
     "DeploymentId": {
-     "Ref": "helloApiDeploymentBA40140340a2531d67b6e44706923b48d7147c70"
+     "Ref": "InventoryApiDeployment382203FB1397a562cb81c55151465f79303e9f19"
     },
     "StageName": "prod"
    },
    "Metadata": {
-    "aws:cdk:path": "CdkStack/helloApi/DeploymentStage.prod/Resource"
+    "aws:cdk:path": "CdkStack/InventoryApi/DeploymentStage.prod/Resource"
    }
   },
-  "helloApipostB64A2F9F": {
+  "InventoryApipostBDC11EB7": {
    "Type": "AWS::ApiGateway::Resource",
    "Properties": {
     "ParentId": {
      "Fn::GetAtt": [
-      "helloApiC07BB54E",
+      "InventoryApi49B09E7D",
       "RootResourceId"
      ]
     },
     "PathPart": "post",
     "RestApiId": {
-     "Ref": "helloApiC07BB54E"
+     "Ref": "InventoryApi49B09E7D"
     }
    },
    "Metadata": {
-    "aws:cdk:path": "CdkStack/helloApi/Default/post/Resource"
+    "aws:cdk:path": "CdkStack/InventoryApi/Default/post/Resource"
    }
   },
-  "helloApipostPOSTApiPermissionCdkStackhelloApiEAE07F9BPOSTpostB1F09208": {
+  "InventoryApipostPOSTApiPermissionCdkStackInventoryApiF1A69B73POSTpostE6A61BEF": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
@@ -330,11 +345,11 @@
        },
        ":",
        {
-        "Ref": "helloApiC07BB54E"
+        "Ref": "InventoryApi49B09E7D"
        },
        "/",
        {
-        "Ref": "helloApiDeploymentStageprod7750D22A"
+        "Ref": "InventoryApiDeploymentStageprod5D1FE13B"
        },
        "/POST/post"
       ]
@@ -342,10 +357,10 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "CdkStack/helloApi/Default/post/POST/ApiPermission.CdkStackhelloApiEAE07F9B.POST..post"
+    "aws:cdk:path": "CdkStack/InventoryApi/Default/post/POST/ApiPermission.CdkStackInventoryApiF1A69B73.POST..post"
    }
   },
-  "helloApipostPOSTApiPermissionTestCdkStackhelloApiEAE07F9BPOSTpost34E7E3E6": {
+  "InventoryApipostPOSTApiPermissionTestCdkStackInventoryApiF1A69B73POSTpost6BECB927": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
@@ -374,7 +389,7 @@
        },
        ":",
        {
-        "Ref": "helloApiC07BB54E"
+        "Ref": "InventoryApi49B09E7D"
        },
        "/test-invoke-stage/POST/post"
       ]
@@ -382,18 +397,18 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "CdkStack/helloApi/Default/post/POST/ApiPermission.Test.CdkStackhelloApiEAE07F9B.POST..post"
+    "aws:cdk:path": "CdkStack/InventoryApi/Default/post/POST/ApiPermission.Test.CdkStackInventoryApiF1A69B73.POST..post"
    }
   },
-  "helloApipostPOSTFC168888": {
+  "InventoryApipostPOST3B9AD72E": {
    "Type": "AWS::ApiGateway::Method",
    "Properties": {
     "HttpMethod": "POST",
     "ResourceId": {
-     "Ref": "helloApipostB64A2F9F"
+     "Ref": "InventoryApipostBDC11EB7"
     },
     "RestApiId": {
-     "Ref": "helloApiC07BB54E"
+     "Ref": "InventoryApi49B09E7D"
     },
     "AuthorizationType": "NONE",
     "Integration": {
@@ -425,28 +440,28 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "CdkStack/helloApi/Default/post/POST/Resource"
+    "aws:cdk:path": "CdkStack/InventoryApi/Default/post/POST/Resource"
    }
   },
-  "helloApidelete049ECA1F": {
+  "InventoryApideleteCE0100BE": {
    "Type": "AWS::ApiGateway::Resource",
    "Properties": {
     "ParentId": {
      "Fn::GetAtt": [
-      "helloApiC07BB54E",
+      "InventoryApi49B09E7D",
       "RootResourceId"
      ]
     },
     "PathPart": "delete",
     "RestApiId": {
-     "Ref": "helloApiC07BB54E"
+     "Ref": "InventoryApi49B09E7D"
     }
    },
    "Metadata": {
-    "aws:cdk:path": "CdkStack/helloApi/Default/delete/Resource"
+    "aws:cdk:path": "CdkStack/InventoryApi/Default/delete/Resource"
    }
   },
-  "helloApideleteDELETEApiPermissionCdkStackhelloApiEAE07F9BDELETEdeleteBC890C14": {
+  "InventoryApideletePOSTApiPermissionCdkStackInventoryApiF1A69B73POSTdeleteCBD37C91": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
@@ -475,22 +490,22 @@
        },
        ":",
        {
-        "Ref": "helloApiC07BB54E"
+        "Ref": "InventoryApi49B09E7D"
        },
        "/",
        {
-        "Ref": "helloApiDeploymentStageprod7750D22A"
+        "Ref": "InventoryApiDeploymentStageprod5D1FE13B"
        },
-       "/DELETE/delete"
+       "/POST/delete"
       ]
      ]
     }
    },
    "Metadata": {
-    "aws:cdk:path": "CdkStack/helloApi/Default/delete/DELETE/ApiPermission.CdkStackhelloApiEAE07F9B.DELETE..delete"
+    "aws:cdk:path": "CdkStack/InventoryApi/Default/delete/POST/ApiPermission.CdkStackInventoryApiF1A69B73.POST..delete"
    }
   },
-  "helloApideleteDELETEApiPermissionTestCdkStackhelloApiEAE07F9BDELETEdelete06B90365": {
+  "InventoryApideletePOSTApiPermissionTestCdkStackInventoryApiF1A69B73POSTdelete386AF91F": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
@@ -519,26 +534,26 @@
        },
        ":",
        {
-        "Ref": "helloApiC07BB54E"
+        "Ref": "InventoryApi49B09E7D"
        },
-       "/test-invoke-stage/DELETE/delete"
+       "/test-invoke-stage/POST/delete"
       ]
      ]
     }
    },
    "Metadata": {
-    "aws:cdk:path": "CdkStack/helloApi/Default/delete/DELETE/ApiPermission.Test.CdkStackhelloApiEAE07F9B.DELETE..delete"
+    "aws:cdk:path": "CdkStack/InventoryApi/Default/delete/POST/ApiPermission.Test.CdkStackInventoryApiF1A69B73.POST..delete"
    }
   },
-  "helloApideleteDELETE81DB68CE": {
+  "InventoryApideletePOSTC12CA7D6": {
    "Type": "AWS::ApiGateway::Method",
    "Properties": {
-    "HttpMethod": "DELETE",
+    "HttpMethod": "POST",
     "ResourceId": {
-     "Ref": "helloApidelete049ECA1F"
+     "Ref": "InventoryApideleteCE0100BE"
     },
     "RestApiId": {
-     "Ref": "helloApiC07BB54E"
+     "Ref": "InventoryApi49B09E7D"
     },
     "AuthorizationType": "NONE",
     "Integration": {
@@ -570,22 +585,22 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "CdkStack/helloApi/Default/delete/DELETE/Resource"
+    "aws:cdk:path": "CdkStack/InventoryApi/Default/delete/POST/Resource"
    }
   },
-  "myBucket5AF9C99B": {
+  "inventoryBucketA35F81F0": {
    "Type": "AWS::S3::Bucket",
    "UpdateReplacePolicy": "Retain",
    "DeletionPolicy": "Retain",
    "Metadata": {
-    "aws:cdk:path": "CdkStack/myBucket/Resource"
+    "aws:cdk:path": "CdkStack/inventoryBucket/Resource"
    }
   },
-  "myBucketPolicyDAC36B74": {
+  "inventoryBucketPolicyF703A301": {
    "Type": "AWS::S3::BucketPolicy",
    "Properties": {
     "Bucket": {
-     "Ref": "myBucket5AF9C99B"
+     "Ref": "inventoryBucketA35F81F0"
     },
     "PolicyDocument": {
      "Statement": [
@@ -607,7 +622,7 @@
          [
           {
            "Fn::GetAtt": [
-            "myBucket5AF9C99B",
+            "inventoryBucketA35F81F0",
             "Arn"
            ]
           },
@@ -621,7 +636,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "CdkStack/myBucket/Policy/Resource"
+    "aws:cdk:path": "CdkStack/inventoryBucket/Policy/Resource"
    }
   },
   "myOAI726DB750": {
@@ -635,14 +650,14 @@
     "aws:cdk:path": "CdkStack/myOAI/Resource"
    }
   },
-  "myDist9DB766F3": {
+  "inventoryFront9AE85105": {
    "Type": "AWS::CloudFront::Distribution",
    "Properties": {
     "DistributionConfig": {
      "DefaultCacheBehavior": {
       "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
       "Compress": true,
-      "TargetOriginId": "CdkStackmyDistOrigin14259FED5",
+      "TargetOriginId": "CdkStackinventoryFrontOrigin110573FEE",
       "ViewerProtocolPolicy": "allow-all"
      },
      "DefaultRootObject": "index.html",
@@ -653,12 +668,12 @@
       {
        "DomainName": {
         "Fn::GetAtt": [
-         "myBucket5AF9C99B",
+         "inventoryBucketA35F81F0",
          "RegionalDomainName"
         ]
        },
-       "Id": "CdkStackmyDistOrigin14259FED5",
-       "OriginPath": "/xml",
+       "Id": "CdkStackinventoryFrontOrigin110573FEE",
+       "OriginPath": "/html",
        "S3OriginConfig": {
         "OriginAccessIdentity": {
          "Fn::Join": [
@@ -677,7 +692,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "CdkStack/myDist/Resource"
+    "aws:cdk:path": "CdkStack/inventoryFront/Resource"
    }
   },
   "CDKMetadata": {
@@ -692,14 +707,14 @@
   }
  },
  "Outputs": {
-  "helloApiEndpoint79747C48": {
+  "InventoryApiEndpoint825CF96A": {
    "Value": {
     "Fn::Join": [
      "",
      [
       "https://",
       {
-       "Ref": "helloApiC07BB54E"
+       "Ref": "InventoryApi49B09E7D"
       },
       ".execute-api.",
       {
@@ -711,7 +726,7 @@
       },
       "/",
       {
-       "Ref": "helloApiDeploymentStageprod7750D22A"
+       "Ref": "InventoryApiDeploymentStageprod5D1FE13B"
       },
       "/"
      ]
