@@ -16,7 +16,7 @@ export class CdkStack extends cdk.Stack {
 
     //Dynamodb
 
-    const noteTable = new dynamodb.Table(this, "NoteTable", {
+    const noteTable = new dynamodb.Table(this, "InventoryTable", {
       partitionKey: { name: "id", type: dynamodb.AttributeType.STRING },
     });
 
@@ -25,7 +25,7 @@ export class CdkStack extends cdk.Stack {
     const postFunction = new lambda.Function(this, "PostFuntion", {
       runtime: lambda.Runtime.PYTHON_3_7,
       handler: 'index.lambdaFuncion',
-      code: lambda.Code.fromInline('def lambdaFuncion(event, context):\n    print("Hello World")\n'),
+      code: lambda.Code.fromInline('def lambdaFuncion(event, context):\n    print("Hello World post")\n'),
       environment: {
         TABLE: noteTable.tableName,
       },
@@ -36,7 +36,7 @@ export class CdkStack extends cdk.Stack {
     const deleteFunction = new lambda.Function(this, "DeleteFunction", {
       runtime: lambda.Runtime.PYTHON_3_9,
       handler: 'index.lambdaFuncion',
-      code: lambda.Code.fromInline('def lambdaFuncion(event, context):\n    print("Hello World")\n'),
+      code: lambda.Code.fromInline('def lambdaFuncion(event, context):\n    print("Hello World delete")\n'),
       environment: {
         TABLE: noteTable.tableName,
       },
@@ -45,12 +45,13 @@ export class CdkStack extends cdk.Stack {
     //permiso para lambda
 
     noteTable.grantWriteData(postFunction);
+    noteTable.grant(postFunction, "dynamodb:Scan");
     noteTable.grantReadWriteData(deleteFunction);
 
 
     //APIgatway
 
-    const helloAPI = new apigw.RestApi(this, "helloApi");
+    const helloAPI = new apigw.RestApi(this, "InventoryApi");
 
     helloAPI.root
       .resourceForPath("post")
@@ -58,11 +59,11 @@ export class CdkStack extends cdk.Stack {
 
     helloAPI.root
       .resourceForPath("delete")
-      .addMethod("DELETE", new apigw.LambdaIntegration(deleteFunction))
+      .addMethod("POST", new apigw.LambdaIntegration(deleteFunction))
 
 
     // Creates a distribution from an S3 bucket.
-    const myBucket = new s3.Bucket(this, 'myBucket');
+    const myBucket = new s3.Bucket(this, 'inventoryBucket');
     const oai = new cloudfront.OriginAccessIdentity(this, 'myOAI');
 
     myBucket.addToResourcePolicy(new iam.PolicyStatement({
@@ -72,7 +73,7 @@ export class CdkStack extends cdk.Stack {
       resources: [myBucket.arnForObjects('*')],
     }));
     
-    new cloudfront.Distribution(this, 'myDist', {
+    new cloudfront.Distribution(this, 'inventoryFront', {
       defaultBehavior: { 
         origin: new origins.S3Origin(myBucket, {
           originPath: '/html',
