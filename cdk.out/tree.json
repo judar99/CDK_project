@@ -442,7 +442,7 @@
                           "Ref": "InventoryApi49B09E7D"
                         },
                         "deploymentId": {
-                          "Ref": "InventoryApiDeployment382203FB1397a562cb81c55151465f79303e9f19"
+                          "Ref": "InventoryApiDeployment382203FB4cf44e193cc5e35eb66ee62878215087"
                         },
                         "stageName": "prod"
                       }
@@ -470,6 +470,199 @@
                 "id": "Default",
                 "path": "CdkStack/InventoryApi/Default",
                 "children": {
+                  "prueba": {
+                    "id": "prueba",
+                    "path": "CdkStack/InventoryApi/Default/prueba",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "CdkStack/InventoryApi/Default/prueba/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Resource",
+                          "aws:cdk:cloudformation:props": {
+                            "parentId": {
+                              "Fn::GetAtt": [
+                                "InventoryApi49B09E7D",
+                                "RootResourceId"
+                              ]
+                            },
+                            "pathPart": "prueba",
+                            "restApiId": {
+                              "Ref": "InventoryApi49B09E7D"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.CfnResource",
+                          "version": "2.69.0"
+                        }
+                      },
+                      "POST": {
+                        "id": "POST",
+                        "path": "CdkStack/InventoryApi/Default/prueba/POST",
+                        "children": {
+                          "ApiPermission.CdkStackInventoryApiF1A69B73.POST..prueba": {
+                            "id": "ApiPermission.CdkStackInventoryApiF1A69B73.POST..prueba",
+                            "path": "CdkStack/InventoryApi/Default/prueba/POST/ApiPermission.CdkStackInventoryApiF1A69B73.POST..prueba",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "PostFuntionE67F3642",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":execute-api:",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "AWS::AccountId"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "InventoryApi49B09E7D"
+                                      },
+                                      "/",
+                                      {
+                                        "Ref": "InventoryApiDeploymentStageprod5D1FE13B"
+                                      },
+                                      "/POST/prueba"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                              "version": "2.69.0"
+                            }
+                          },
+                          "ApiPermission.Test.CdkStackInventoryApiF1A69B73.POST..prueba": {
+                            "id": "ApiPermission.Test.CdkStackInventoryApiF1A69B73.POST..prueba",
+                            "path": "CdkStack/InventoryApi/Default/prueba/POST/ApiPermission.Test.CdkStackInventoryApiF1A69B73.POST..prueba",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "PostFuntionE67F3642",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":execute-api:",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "AWS::AccountId"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "InventoryApi49B09E7D"
+                                      },
+                                      "/test-invoke-stage/POST/prueba"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                              "version": "2.69.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "CdkStack/InventoryApi/Default/prueba/POST/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                              "aws:cdk:cloudformation:props": {
+                                "httpMethod": "POST",
+                                "resourceId": {
+                                  "Ref": "InventoryApipruebaD84D962F"
+                                },
+                                "restApiId": {
+                                  "Ref": "InventoryApi49B09E7D"
+                                },
+                                "authorizationType": "NONE",
+                                "integration": {
+                                  "type": "AWS_PROXY",
+                                  "uri": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":apigateway:",
+                                        {
+                                          "Ref": "AWS::Region"
+                                        },
+                                        ":lambda:path/2015-03-31/functions/",
+                                        {
+                                          "Fn::GetAtt": [
+                                            "PostFuntionE67F3642",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "/invocations"
+                                      ]
+                                    ]
+                                  },
+                                  "integrationHttpMethod": "POST"
+                                },
+                                "methodResponses": [
+                                  {
+                                    "statusCode": "200",
+                                    "responseParameters": {
+                                      "method.response.header.Access-Control-Allow-Origin": true
+                                    }
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                              "version": "2.69.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                          "version": "2.69.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.Resource",
+                      "version": "2.69.0"
+                    }
+                  },
                   "post": {
                     "id": "post",
                     "path": "CdkStack/InventoryApi/Default/post",

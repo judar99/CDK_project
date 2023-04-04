@@ -22,6 +22,7 @@ export class CdkStack extends cdk.Stack {
 
     //Lambda Funtions 
 
+ 
     const postFunction = new lambda.Function(this, "PostFuntion", {
       runtime: lambda.Runtime.PYTHON_3_7,
       handler: 'index.lambdaFuncion',
@@ -51,13 +52,27 @@ export class CdkStack extends cdk.Stack {
 
     //APIgatway
 
-    const helloAPI = new apigw.RestApi(this, "InventoryApi");
+    const inventoryAPI = new apigw.RestApi(this, "InventoryApi");
 
-    helloAPI.root
+    const postResource = inventoryAPI.root.addResource('prueba');
+
+    postResource.addMethod('POST', new apigw.LambdaIntegration(postFunction), {
+      methodResponses: [
+        {
+          statusCode: '200',
+          responseParameters: {
+            'method.response.header.Access-Control-Allow-Origin': true
+          }, 
+        }
+      ]
+    });
+   
+
+    inventoryAPI.root
       .resourceForPath("post")
       .addMethod("POST", new apigw.LambdaIntegration(postFunction))
 
-    helloAPI.root
+    inventoryAPI.root
       .resourceForPath("delete")
       .addMethod("POST", new apigw.LambdaIntegration(deleteFunction))
 
