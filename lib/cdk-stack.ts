@@ -33,6 +33,15 @@ export class CdkStack extends cdk.Stack {
       },
     });
 
+    const createFunction = new lambda.Function(this, "CreateFunction", {
+      runtime: lambda.Runtime.PYTHON_3_9,
+      handler: 'index.lambdaFuncion',
+      code: lambda.Code.fromInline('def lambdaFuncion(event, context):\n    print("Hello World delete")\n'),
+      environment: {
+        TABLE: inventoryTable.tableName,
+      },
+    });
+
     const deleteFunction = new lambda.Function(this, "DeleteFunction", {
       runtime: lambda.Runtime.PYTHON_3_9,
       handler: 'index.lambdaFuncion',
@@ -45,6 +54,7 @@ export class CdkStack extends cdk.Stack {
     //permiso para lambda
     inventoryTable.grantWriteData(postFunction);
     inventoryTable.grant(postFunction, "dynamodb:Scan");
+    inventoryTable.grantReadWriteData(createFunction);
     inventoryTable.grantReadWriteData(deleteFunction);
 
 
@@ -55,6 +65,10 @@ export class CdkStack extends cdk.Stack {
     inventoryAPI.root
       .resourceForPath("post")
       .addMethod("POST", new apigw.LambdaIntegration(postFunction))
+
+      inventoryAPI.root
+      .resourceForPath("create")
+      .addMethod("POST", new apigw.LambdaIntegration(createFunction))
 
     inventoryAPI.root
       .resourceForPath("delete")
@@ -72,7 +86,7 @@ export class CdkStack extends cdk.Stack {
       resources: [myBucket.arnForObjects('*')],
     }));
    
-    myBucket.addToResourcePolicy(new iam.PolicyStatement({
+    bucketImg.addToResourcePolicy(new iam.PolicyStatement({
       effect: iam.Effect.ALLOW,
       actions: ['s3:GetObject', 's3:DeleteObject'],
       principals: [new iam.AnyPrincipal()],

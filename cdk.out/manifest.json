@@ -17,7 +17,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c0570e721f59bb3b239f8c7e89df21aa09241431ee71c689e748131a6ebfe2e6.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/5a4d7118e05a4e388ffc31d0048a49521c0edaeccf658de221418c669aa9bb9b.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -57,6 +57,24 @@
             "data": "PostFuntionE67F3642"
           }
         ],
+        "/CdkStack/CreateFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateFunctionServiceRole58157AB4"
+          }
+        ],
+        "/CdkStack/CreateFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateFunctionServiceRoleDefaultPolicy91C5B473"
+          }
+        ],
+        "/CdkStack/CreateFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateFunction1693F3C7"
+          }
+        ],
         "/CdkStack/DeleteFunction/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -84,7 +102,7 @@
         "/CdkStack/InventoryApi/Deployment/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "InventoryApiDeployment382203FB1397a562cb81c55151465f79303e9f19"
+            "data": "InventoryApiDeployment382203FBaf3f793c142a02d94d2e40857b6ec0b7"
           }
         ],
         "/CdkStack/InventoryApi/DeploymentStage.prod/Resource": [
@@ -121,6 +139,30 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "InventoryApipostPOST3B9AD72E"
+          }
+        ],
+        "/CdkStack/InventoryApi/Default/create/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InventoryApicreateD6FEA457"
+          }
+        ],
+        "/CdkStack/InventoryApi/Default/create/POST/ApiPermission.CdkStackInventoryApiF1A69B73.POST..create": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InventoryApicreatePOSTApiPermissionCdkStackInventoryApiF1A69B73POSTcreateB17B5146"
+          }
+        ],
+        "/CdkStack/InventoryApi/Default/create/POST/ApiPermission.Test.CdkStackInventoryApiF1A69B73.POST..create": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InventoryApicreatePOSTApiPermissionTestCdkStackInventoryApiF1A69B73POSTcreateB9AEEA0A"
+          }
+        ],
+        "/CdkStack/InventoryApi/Default/create/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InventoryApicreatePOSTBC577D1D"
           }
         ],
         "/CdkStack/InventoryApi/Default/delete/Resource": [
@@ -163,6 +205,12 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "imgBucketA8FCDD83"
+          }
+        ],
+        "/CdkStack/imgBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "imgBucketPolicy0B46B679"
           }
         ],
         "/CdkStack/myOAI/Resource": [

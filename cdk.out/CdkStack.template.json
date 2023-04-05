@@ -145,6 +145,117 @@
     "aws:cdk:path": "CdkStack/PostFuntion/Resource"
    }
   },
+  "CreateFunctionServiceRole58157AB4": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "CdkStack/CreateFunction/ServiceRole/Resource"
+   }
+  },
+  "CreateFunctionServiceRoleDefaultPolicy91C5B473": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable",
+        "dynamodb:GetItem",
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator",
+        "dynamodb:PutItem",
+        "dynamodb:Query",
+        "dynamodb:Scan",
+        "dynamodb:UpdateItem"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "InventoryTableFD135387",
+          "Arn"
+         ]
+        },
+        {
+         "Ref": "AWS::NoValue"
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CreateFunctionServiceRoleDefaultPolicy91C5B473",
+    "Roles": [
+     {
+      "Ref": "CreateFunctionServiceRole58157AB4"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "CdkStack/CreateFunction/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "CreateFunction1693F3C7": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "def lambdaFuncion(event, context):\n    print(\"Hello World delete\")\n"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "CreateFunctionServiceRole58157AB4",
+      "Arn"
+     ]
+    },
+    "Environment": {
+     "Variables": {
+      "TABLE": {
+       "Ref": "InventoryTableFD135387"
+      }
+     }
+    },
+    "Handler": "index.lambdaFuncion",
+    "Runtime": "python3.9"
+   },
+   "DependsOn": [
+    "CreateFunctionServiceRoleDefaultPolicy91C5B473",
+    "CreateFunctionServiceRole58157AB4"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "CdkStack/CreateFunction/Resource"
+   }
+  },
   "DeleteFunctionServiceRole092E9E58": {
    "Type": "AWS::IAM::Role",
    "Properties": {
@@ -265,7 +376,7 @@
     "aws:cdk:path": "CdkStack/InventoryApi/Resource"
    }
   },
-  "InventoryApiDeployment382203FB1397a562cb81c55151465f79303e9f19": {
+  "InventoryApiDeployment382203FBaf3f793c142a02d94d2e40857b6ec0b7": {
    "Type": "AWS::ApiGateway::Deployment",
    "Properties": {
     "RestApiId": {
@@ -274,6 +385,8 @@
     "Description": "Automatically created by the RestApi construct"
    },
    "DependsOn": [
+    "InventoryApicreatePOSTBC577D1D",
+    "InventoryApicreateD6FEA457",
     "InventoryApideletePOSTC12CA7D6",
     "InventoryApideleteCE0100BE",
     "InventoryApipostPOST3B9AD72E",
@@ -290,7 +403,7 @@
      "Ref": "InventoryApi49B09E7D"
     },
     "DeploymentId": {
-     "Ref": "InventoryApiDeployment382203FB1397a562cb81c55151465f79303e9f19"
+     "Ref": "InventoryApiDeployment382203FBaf3f793c142a02d94d2e40857b6ec0b7"
     },
     "StageName": "prod"
    },
@@ -441,6 +554,151 @@
    },
    "Metadata": {
     "aws:cdk:path": "CdkStack/InventoryApi/Default/post/POST/Resource"
+   }
+  },
+  "InventoryApicreateD6FEA457": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "InventoryApi49B09E7D",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "create",
+    "RestApiId": {
+     "Ref": "InventoryApi49B09E7D"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CdkStack/InventoryApi/Default/create/Resource"
+   }
+  },
+  "InventoryApicreatePOSTApiPermissionCdkStackInventoryApiF1A69B73POSTcreateB17B5146": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "CreateFunction1693F3C7",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "InventoryApi49B09E7D"
+       },
+       "/",
+       {
+        "Ref": "InventoryApiDeploymentStageprod5D1FE13B"
+       },
+       "/POST/create"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CdkStack/InventoryApi/Default/create/POST/ApiPermission.CdkStackInventoryApiF1A69B73.POST..create"
+   }
+  },
+  "InventoryApicreatePOSTApiPermissionTestCdkStackInventoryApiF1A69B73POSTcreateB9AEEA0A": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "CreateFunction1693F3C7",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "InventoryApi49B09E7D"
+       },
+       "/test-invoke-stage/POST/create"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CdkStack/InventoryApi/Default/create/POST/ApiPermission.Test.CdkStackInventoryApiF1A69B73.POST..create"
+   }
+  },
+  "InventoryApicreatePOSTBC577D1D": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "HttpMethod": "POST",
+    "ResourceId": {
+     "Ref": "InventoryApicreateD6FEA457"
+    },
+    "RestApiId": {
+     "Ref": "InventoryApi49B09E7D"
+    },
+    "AuthorizationType": "NONE",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:",
+        {
+         "Ref": "AWS::Region"
+        },
+        ":lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "CreateFunction1693F3C7",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CdkStack/InventoryApi/Default/create/POST/Resource"
    }
   },
   "InventoryApideleteCE0100BE": {
@@ -630,7 +888,31 @@
          ]
         ]
        }
-      },
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CdkStack/inventoryBucket/Policy/Resource"
+   }
+  },
+  "imgBucketA8FCDD83": {
+   "Type": "AWS::S3::Bucket",
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "CdkStack/imgBucket/Resource"
+   }
+  },
+  "imgBucketPolicy0B46B679": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "imgBucketA8FCDD83"
+    },
+    "PolicyDocument": {
+     "Statement": [
       {
        "Action": [
         "s3:DeleteObject",
@@ -660,15 +942,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "CdkStack/inventoryBucket/Policy/Resource"
-   }
-  },
-  "imgBucketA8FCDD83": {
-   "Type": "AWS::S3::Bucket",
-   "UpdateReplacePolicy": "Retain",
-   "DeletionPolicy": "Retain",
-   "Metadata": {
-    "aws:cdk:path": "CdkStack/imgBucket/Resource"
+    "aws:cdk:path": "CdkStack/imgBucket/Policy/Resource"
    }
   },
   "myOAI726DB750": {
