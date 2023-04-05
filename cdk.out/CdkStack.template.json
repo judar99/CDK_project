@@ -230,7 +230,7 @@
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Code": {
-     "ZipFile": "def lambdaFuncion(event, context):\n    print(\"Hello World delete\")\n"
+     "ZipFile": "def lambdaFuncion(event, context):\n    print(\"Hello World create\")\n"
     },
     "Role": {
      "Fn::GetAtt": [
@@ -356,7 +356,7 @@
       }
      }
     },
-    "Handler": "index.lambdaFuncion",
+    "Handler": "delete.lambdaFuncion",
     "Runtime": "python3.9"
    },
    "DependsOn": [

@@ -353,7 +353,7 @@
                   "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
                   "aws:cdk:cloudformation:props": {
                     "code": {
-                      "zipFile": "def lambdaFuncion(event, context):\n    print(\"Hello World delete\")\n"
+                      "zipFile": "def lambdaFuncion(event, context):\n    print(\"Hello World create\")\n"
                     },
                     "role": {
                       "Fn::GetAtt": [
@@ -528,7 +528,7 @@
                         }
                       }
                     },
-                    "handler": "index.lambdaFuncion",
+                    "handler": "delete.lambdaFuncion",
                     "runtime": "python3.9"
                   }
                 },
