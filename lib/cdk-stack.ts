@@ -20,13 +20,11 @@ export class CdkStack extends cdk.Stack {
       partitionKey: { name: "id", type: dynamodb.AttributeType.STRING },
     });
 
-
-
     //Lambda Funtions 
 
     const postFunction = new lambda.Function(this, "PostFuntion", {
       runtime: lambda.Runtime.PYTHON_3_7,
-      handler: 'index.lambdaFuncion',
+      handler: 'post.lambdaFuncion',
       code: lambda.Code.fromInline('def lambdaFuncion(event, context):\n    print("Hello World post")\n'),
       environment: {
         TABLE: inventoryTable.tableName,
@@ -76,6 +74,7 @@ export class CdkStack extends cdk.Stack {
 
 
     // Creates a distribution from an S3 bucket.
+
     const myBucket = new s3.Bucket(this, 'inventoryBucket');
     const bucketImg = new s3.Bucket(this,"imgBucket")
 

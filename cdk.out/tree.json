@@ -208,7 +208,7 @@
                         }
                       }
                     },
-                    "handler": "index.lambdaFuncion",
+                    "handler": "post.lambdaFuncion",
                     "runtime": "python3.7"
                   }
                 },
