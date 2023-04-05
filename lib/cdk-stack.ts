@@ -16,57 +16,41 @@ export class CdkStack extends cdk.Stack {
 
     //Dynamodb
 
-    const noteTable = new dynamodb.Table(this, "InventoryTable", {
+    const inventoryTable = new dynamodb.Table(this, "InventoryTable", {
       partitionKey: { name: "id", type: dynamodb.AttributeType.STRING },
     });
 
+
+
     //Lambda Funtions 
 
- 
     const postFunction = new lambda.Function(this, "PostFuntion", {
       runtime: lambda.Runtime.PYTHON_3_7,
       handler: 'index.lambdaFuncion',
       code: lambda.Code.fromInline('def lambdaFuncion(event, context):\n    print("Hello World post")\n'),
       environment: {
-        TABLE: noteTable.tableName,
+        TABLE: inventoryTable.tableName,
       },
     });
 
- 
-    
     const deleteFunction = new lambda.Function(this, "DeleteFunction", {
       runtime: lambda.Runtime.PYTHON_3_9,
       handler: 'index.lambdaFuncion',
       code: lambda.Code.fromInline('def lambdaFuncion(event, context):\n    print("Hello World delete")\n'),
       environment: {
-        TABLE: noteTable.tableName,
+        TABLE: inventoryTable.tableName,
       },
     });
 
     //permiso para lambda
-
-    noteTable.grantWriteData(postFunction);
-    noteTable.grant(postFunction, "dynamodb:Scan");
-    noteTable.grantReadWriteData(deleteFunction);
+    inventoryTable.grantWriteData(postFunction);
+    inventoryTable.grant(postFunction, "dynamodb:Scan");
+    inventoryTable.grantReadWriteData(deleteFunction);
 
 
     //APIgatway
 
     const inventoryAPI = new apigw.RestApi(this, "InventoryApi");
-
-    const postResource = inventoryAPI.root.addResource('prueba');
-
-    postResource.addMethod('POST', new apigw.LambdaIntegration(postFunction), {
-      methodResponses: [
-        {
-          statusCode: '200',
-          responseParameters: {
-            'method.response.header.Access-Control-Allow-Origin': true
-          }, 
-        }
-      ]
-    });
-   
 
     inventoryAPI.root
       .resourceForPath("post")
@@ -79,7 +63,7 @@ export class CdkStack extends cdk.Stack {
 
     // Creates a distribution from an S3 bucket.
     const myBucket = new s3.Bucket(this, 'inventoryBucket');
-    const oai = new cloudfront.OriginAccessIdentity(this, 'myOAI');
+    const bucketImg = new s3.Bucket(this,"imgBucket")
 
     myBucket.addToResourcePolicy(new iam.PolicyStatement({
       effect: iam.Effect.ALLOW,
@@ -87,7 +71,16 @@ export class CdkStack extends cdk.Stack {
       principals: [new iam.AnyPrincipal()],
       resources: [myBucket.arnForObjects('*')],
     }));
-    
+   
+    myBucket.addToResourcePolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: ['s3:GetObject', 's3:DeleteObject'],
+      principals: [new iam.AnyPrincipal()],
+      resources: [bucketImg.arnForObjects('*')],
+    }));
+
+    const oai = new cloudfront.OriginAccessIdentity(this, 'myOAI');
+
     new cloudfront.Distribution(this, 'inventoryFront', {
       defaultBehavior: { 
         origin: new origins.S3Origin(myBucket, {
@@ -98,5 +91,5 @@ export class CdkStack extends cdk.Stack {
       defaultRootObject:'index.html'
     });
   }
-
+  
 }
