@@ -368,7 +368,7 @@
                         }
                       }
                     },
-                    "handler": "index.lambdaFuncion",
+                    "handler": "create.lambdaFuncion",
                     "runtime": "python3.9"
                   }
                 },

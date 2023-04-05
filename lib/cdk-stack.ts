@@ -33,7 +33,7 @@ export class CdkStack extends cdk.Stack {
 
     const createFunction = new lambda.Function(this, "CreateFunction", {
       runtime: lambda.Runtime.PYTHON_3_9,
-      handler: 'index.lambdaFuncion',
+      handler: 'create.lambdaFuncion',
       code: lambda.Code.fromInline('def lambdaFuncion(event, context):\n    print("Hello World delete")\n'),
       environment: {
         TABLE: inventoryTable.tableName,

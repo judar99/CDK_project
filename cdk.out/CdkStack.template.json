@@ -245,7 +245,7 @@
       }
      }
     },
-    "Handler": "index.lambdaFuncion",
+    "Handler": "create.lambdaFuncion",
     "Runtime": "python3.9"
    },
    "DependsOn": [
