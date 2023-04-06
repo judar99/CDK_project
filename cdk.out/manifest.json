@@ -17,7 +17,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/d51d5fd0bacd5425dce2bd0b74b5d9ff34839324aa38e308170ed1733debf5aa.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/950ea631daf2fb21a4af116e53260e37f449c5476af1ce27392e153b7094337b.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -102,7 +102,7 @@
         "/CdkStack/InventoryApi/Deployment/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "InventoryApiDeployment382203FBaf3f793c142a02d94d2e40857b6ec0b7"
+            "data": "InventoryApiDeployment382203FB3ccb7fb07f0ee1afd8871dafeca0ddba"
           }
         ],
         "/CdkStack/InventoryApi/DeploymentStage.prod/Resource": [
@@ -117,10 +117,22 @@
             "data": "InventoryApiEndpoint825CF96A"
           }
         ],
+        "/CdkStack/InventoryApi/Default/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InventoryApiOPTIONS9CCF6FDB"
+          }
+        ],
         "/CdkStack/InventoryApi/Default/post/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "InventoryApipostBDC11EB7"
+          }
+        ],
+        "/CdkStack/InventoryApi/Default/post/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InventoryApipostOPTIONSA8FAA595"
           }
         ],
         "/CdkStack/InventoryApi/Default/post/POST/ApiPermission.CdkStackInventoryApiF1A69B73.POST..post": [
@@ -147,6 +159,12 @@
             "data": "InventoryApicreateD6FEA457"
           }
         ],
+        "/CdkStack/InventoryApi/Default/create/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InventoryApicreateOPTIONSB2BEE5E4"
+          }
+        ],
         "/CdkStack/InventoryApi/Default/create/POST/ApiPermission.CdkStackInventoryApiF1A69B73.POST..create": [
           {
             "type": "aws:cdk:logicalId",
@@ -169,6 +187,12 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "InventoryApideleteCE0100BE"
+          }
+        ],
+        "/CdkStack/InventoryApi/Default/delete/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InventoryApideleteOPTIONSE4670BAE"
           }
         ],
         "/CdkStack/InventoryApi/Default/delete/POST/ApiPermission.CdkStackInventoryApiF1A69B73.POST..delete": [

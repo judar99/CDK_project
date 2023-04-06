@@ -58,7 +58,12 @@ export class CdkStack extends cdk.Stack {
 
     //APIgatway
 
-    const inventoryAPI = new apigw.RestApi(this, "InventoryApi");
+    const inventoryAPI = new apigw.RestApi(this, "InventoryApi",{
+      defaultCorsPreflightOptions: {
+        allowOrigins: apigw.Cors.ALL_ORIGINS,
+        allowMethods: apigw.Cors.ALL_METHODS
+      }
+      });
 
     inventoryAPI.root
       .resourceForPath("post")

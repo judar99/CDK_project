@@ -376,7 +376,7 @@
     "aws:cdk:path": "CdkStack/InventoryApi/Resource"
    }
   },
-  "InventoryApiDeployment382203FBaf3f793c142a02d94d2e40857b6ec0b7": {
+  "InventoryApiDeployment382203FB3ccb7fb07f0ee1afd8871dafeca0ddba": {
    "Type": "AWS::ApiGateway::Deployment",
    "Properties": {
     "RestApiId": {
@@ -385,10 +385,14 @@
     "Description": "Automatically created by the RestApi construct"
    },
    "DependsOn": [
+    "InventoryApicreateOPTIONSB2BEE5E4",
     "InventoryApicreatePOSTBC577D1D",
     "InventoryApicreateD6FEA457",
+    "InventoryApideleteOPTIONSE4670BAE",
     "InventoryApideletePOSTC12CA7D6",
     "InventoryApideleteCE0100BE",
+    "InventoryApiOPTIONS9CCF6FDB",
+    "InventoryApipostOPTIONSA8FAA595",
     "InventoryApipostPOST3B9AD72E",
     "InventoryApipostBDC11EB7"
    ],
@@ -403,12 +407,57 @@
      "Ref": "InventoryApi49B09E7D"
     },
     "DeploymentId": {
-     "Ref": "InventoryApiDeployment382203FBaf3f793c142a02d94d2e40857b6ec0b7"
+     "Ref": "InventoryApiDeployment382203FB3ccb7fb07f0ee1afd8871dafeca0ddba"
     },
     "StageName": "prod"
    },
    "Metadata": {
     "aws:cdk:path": "CdkStack/InventoryApi/DeploymentStage.prod/Resource"
+   }
+  },
+  "InventoryApiOPTIONS9CCF6FDB": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "HttpMethod": "OPTIONS",
+    "ResourceId": {
+     "Fn::GetAtt": [
+      "InventoryApi49B09E7D",
+      "RootResourceId"
+     ]
+    },
+    "RestApiId": {
+     "Ref": "InventoryApi49B09E7D"
+    },
+    "AuthorizationType": "NONE",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "CdkStack/InventoryApi/Default/OPTIONS/Resource"
    }
   },
   "InventoryApipostBDC11EB7": {
@@ -427,6 +476,48 @@
    },
    "Metadata": {
     "aws:cdk:path": "CdkStack/InventoryApi/Default/post/Resource"
+   }
+  },
+  "InventoryApipostOPTIONSA8FAA595": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "HttpMethod": "OPTIONS",
+    "ResourceId": {
+     "Ref": "InventoryApipostBDC11EB7"
+    },
+    "RestApiId": {
+     "Ref": "InventoryApi49B09E7D"
+    },
+    "AuthorizationType": "NONE",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "CdkStack/InventoryApi/Default/post/OPTIONS/Resource"
    }
   },
   "InventoryApipostPOSTApiPermissionCdkStackInventoryApiF1A69B73POSTpostE6A61BEF": {
@@ -574,6 +665,48 @@
     "aws:cdk:path": "CdkStack/InventoryApi/Default/create/Resource"
    }
   },
+  "InventoryApicreateOPTIONSB2BEE5E4": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "HttpMethod": "OPTIONS",
+    "ResourceId": {
+     "Ref": "InventoryApicreateD6FEA457"
+    },
+    "RestApiId": {
+     "Ref": "InventoryApi49B09E7D"
+    },
+    "AuthorizationType": "NONE",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "CdkStack/InventoryApi/Default/create/OPTIONS/Resource"
+   }
+  },
   "InventoryApicreatePOSTApiPermissionCdkStackInventoryApiF1A69B73POSTcreateB17B5146": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
@@ -717,6 +850,48 @@
    },
    "Metadata": {
     "aws:cdk:path": "CdkStack/InventoryApi/Default/delete/Resource"
+   }
+  },
+  "InventoryApideleteOPTIONSE4670BAE": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "HttpMethod": "OPTIONS",
+    "ResourceId": {
+     "Ref": "InventoryApideleteCE0100BE"
+    },
+    "RestApiId": {
+     "Ref": "InventoryApi49B09E7D"
+    },
+    "AuthorizationType": "NONE",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "CdkStack/InventoryApi/Default/delete/OPTIONS/Resource"
    }
   },
   "InventoryApideletePOSTApiPermissionCdkStackInventoryApiF1A69B73POSTdeleteCBD37C91": {
@@ -1004,7 +1179,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/21QyU7DMBT8lt4dQwtCcOyiShxQq8IdObabvsZL5IUqsvzveClqKnF6M+N547EX+OUNP87IxTaU9Y2AFodPR2iPkvQd2KiI1CyJX6QVHK2PqoCIBJEtIzhsvaIOtMpHU7znRoK1iUUEROJw0HW/zL0WQMfiKygiMkBHHL+QMVm5dcsBivsKN3wQepRcuaxOWCrbldwKkl97Q/mK2Bu5BlX8wd1JsyxVFJF9wmHlac9L9hXVces55RFRoT07Gq0cDjsDHaglpdzad5Y6gSsb6+zZZs+/jg1YZ6D1fx825THedd95N3h394qcrxWD4kZKM47P9uFn/ornz3gxO1uAxvh0k+T4UOcvI+eN9esBAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/22Qy07DMBBFv6V7x9CCECz7UCUWqFVhjxx7GqbxI/KDKrL87zhOKoLEas7M3Lm+8oo+vdD7Bbu6iou2kljT+O4Zb0kefUbRa6aMyMMPVksg27MukIhkqhaMxn3Q3KPRw2rOR7AKnctdIsgUjScz3pd6NBJ5X3SFEmEdNszDlfVZCs6vOyzqCXfQSdMr0H6Yzroctim+I2S9CZbDhjkgb+C/jBiWE922k3PhRNwDjZvAWyjeE43lN+e8T4RLE8TZGu1pPFhsUK85B+deRc6EvlxsB81+0Pyr2KHzFutw+7B5n9KfqIfgu+DnoYu/0QKLmmgjgF7c3ffymS4f6WpxcYiVDfklBfQ01h8OI+736wEAAA=="
    },
    "Metadata": {
     "aws:cdk:path": "CdkStack/CDKMetadata/Default"
