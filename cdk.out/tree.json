@@ -1547,7 +1547,7 @@
                               ],
                               "Effect": "Allow",
                               "Principal": {
-                                "AWS": "*"
+                                "Service": "lambda.amazonaws.com"
                               },
                               "Resource": {
                                 "Fn::Join": [
