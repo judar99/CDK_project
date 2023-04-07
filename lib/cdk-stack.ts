@@ -6,6 +6,7 @@ import * as apigw from "aws-cdk-lib/aws-apigateway";
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
 import * as s3deploy from 'aws-cdk-lib/aws-s3-deployment';
+import * as apigwv2 from "aws-cdk-lib/aws-apigatewayv2";
 const iam = require('aws-cdk-lib/aws-iam');
 const path = require('path');
 import * as s3 from "aws-cdk-lib/aws-s3";
@@ -75,7 +76,7 @@ export class CdkStack extends cdk.Stack {
 
     inventoryAPI.root
       .resourceForPath("delete")
-      .addMethod("POST", new apigw.LambdaIntegration(deleteFunction))
+      .addMethod("DELETE", new apigw.LambdaIntegration(deleteFunction))
 
 
     // Creates a distribution from an S3 bucket.

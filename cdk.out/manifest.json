@@ -17,7 +17,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/950ea631daf2fb21a4af116e53260e37f449c5476af1ce27392e153b7094337b.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/f5f26528999bc082fd313a088fcade253a32ac318edde0de535d7324ec6b77d8.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -102,7 +102,7 @@
         "/CdkStack/InventoryApi/Deployment/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "InventoryApiDeployment382203FB3ccb7fb07f0ee1afd8871dafeca0ddba"
+            "data": "InventoryApiDeployment382203FB74a7980338432900348d2c2544561506"
           }
         ],
         "/CdkStack/InventoryApi/DeploymentStage.prod/Resource": [
@@ -195,22 +195,22 @@
             "data": "InventoryApideleteOPTIONSE4670BAE"
           }
         ],
-        "/CdkStack/InventoryApi/Default/delete/POST/ApiPermission.CdkStackInventoryApiF1A69B73.POST..delete": [
+        "/CdkStack/InventoryApi/Default/delete/DELETE/ApiPermission.CdkStackInventoryApiF1A69B73.DELETE..delete": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "InventoryApideletePOSTApiPermissionCdkStackInventoryApiF1A69B73POSTdeleteCBD37C91"
+            "data": "InventoryApideleteDELETEApiPermissionCdkStackInventoryApiF1A69B73DELETEdeleteF795AAD4"
           }
         ],
-        "/CdkStack/InventoryApi/Default/delete/POST/ApiPermission.Test.CdkStackInventoryApiF1A69B73.POST..delete": [
+        "/CdkStack/InventoryApi/Default/delete/DELETE/ApiPermission.Test.CdkStackInventoryApiF1A69B73.DELETE..delete": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "InventoryApideletePOSTApiPermissionTestCdkStackInventoryApiF1A69B73POSTdelete386AF91F"
+            "data": "InventoryApideleteDELETEApiPermissionTestCdkStackInventoryApiF1A69B73DELETEdelete5906FD36"
           }
         ],
-        "/CdkStack/InventoryApi/Default/delete/POST/Resource": [
+        "/CdkStack/InventoryApi/Default/delete/DELETE/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "InventoryApideletePOSTC12CA7D6"
+            "data": "InventoryApideleteDELETE06270E74"
           }
         ],
         "/CdkStack/inventoryBucket/Resource": [

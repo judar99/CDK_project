@@ -376,7 +376,7 @@
     "aws:cdk:path": "CdkStack/InventoryApi/Resource"
    }
   },
-  "InventoryApiDeployment382203FB3ccb7fb07f0ee1afd8871dafeca0ddba": {
+  "InventoryApiDeployment382203FB74a7980338432900348d2c2544561506": {
    "Type": "AWS::ApiGateway::Deployment",
    "Properties": {
     "RestApiId": {
@@ -388,8 +388,8 @@
     "InventoryApicreateOPTIONSB2BEE5E4",
     "InventoryApicreatePOSTBC577D1D",
     "InventoryApicreateD6FEA457",
+    "InventoryApideleteDELETE06270E74",
     "InventoryApideleteOPTIONSE4670BAE",
-    "InventoryApideletePOSTC12CA7D6",
     "InventoryApideleteCE0100BE",
     "InventoryApiOPTIONS9CCF6FDB",
     "InventoryApipostOPTIONSA8FAA595",
@@ -407,7 +407,7 @@
      "Ref": "InventoryApi49B09E7D"
     },
     "DeploymentId": {
-     "Ref": "InventoryApiDeployment382203FB3ccb7fb07f0ee1afd8871dafeca0ddba"
+     "Ref": "InventoryApiDeployment382203FB74a7980338432900348d2c2544561506"
     },
     "StageName": "prod"
    },
@@ -894,7 +894,7 @@
     "aws:cdk:path": "CdkStack/InventoryApi/Default/delete/OPTIONS/Resource"
    }
   },
-  "InventoryApideletePOSTApiPermissionCdkStackInventoryApiF1A69B73POSTdeleteCBD37C91": {
+  "InventoryApideleteDELETEApiPermissionCdkStackInventoryApiF1A69B73DELETEdeleteF795AAD4": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
@@ -929,16 +929,16 @@
        {
         "Ref": "InventoryApiDeploymentStageprod5D1FE13B"
        },
-       "/POST/delete"
+       "/DELETE/delete"
       ]
      ]
     }
    },
    "Metadata": {
-    "aws:cdk:path": "CdkStack/InventoryApi/Default/delete/POST/ApiPermission.CdkStackInventoryApiF1A69B73.POST..delete"
+    "aws:cdk:path": "CdkStack/InventoryApi/Default/delete/DELETE/ApiPermission.CdkStackInventoryApiF1A69B73.DELETE..delete"
    }
   },
-  "InventoryApideletePOSTApiPermissionTestCdkStackInventoryApiF1A69B73POSTdelete386AF91F": {
+  "InventoryApideleteDELETEApiPermissionTestCdkStackInventoryApiF1A69B73DELETEdelete5906FD36": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
@@ -969,19 +969,19 @@
        {
         "Ref": "InventoryApi49B09E7D"
        },
-       "/test-invoke-stage/POST/delete"
+       "/test-invoke-stage/DELETE/delete"
       ]
      ]
     }
    },
    "Metadata": {
-    "aws:cdk:path": "CdkStack/InventoryApi/Default/delete/POST/ApiPermission.Test.CdkStackInventoryApiF1A69B73.POST..delete"
+    "aws:cdk:path": "CdkStack/InventoryApi/Default/delete/DELETE/ApiPermission.Test.CdkStackInventoryApiF1A69B73.DELETE..delete"
    }
   },
-  "InventoryApideletePOSTC12CA7D6": {
+  "InventoryApideleteDELETE06270E74": {
    "Type": "AWS::ApiGateway::Method",
    "Properties": {
-    "HttpMethod": "POST",
+    "HttpMethod": "DELETE",
     "ResourceId": {
      "Ref": "InventoryApideleteCE0100BE"
     },
@@ -1018,7 +1018,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "CdkStack/InventoryApi/Default/delete/POST/Resource"
+    "aws:cdk:path": "CdkStack/InventoryApi/Default/delete/DELETE/Resource"
    }
   },
   "inventoryBucketA35F81F0": {
@@ -1179,7 +1179,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/22Qy07DMBBFv6V7x9CCECz7UCUWqFVhjxx7GqbxI/KDKrL87zhOKoLEas7M3Lm+8oo+vdD7Bbu6iou2kljT+O4Zb0kefUbRa6aMyMMPVksg27MukIhkqhaMxn3Q3KPRw2rOR7AKnctdIsgUjScz3pd6NBJ5X3SFEmEdNszDlfVZCs6vOyzqCXfQSdMr0H6Yzroctim+I2S9CZbDhjkgb+C/jBiWE922k3PhRNwDjZvAWyjeE43lN+e8T4RLE8TZGu1pPFhsUK85B+deRc6EvlxsB81+0Pyr2KHzFutw+7B5n9KfqIfgu+DnoYu/0QKLmmgjgF7c3ffymS4f6WpxcYiVDfklBfQ01h8OI+736wEAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/22Qy07DMBBFv6V7x9AWCbZ9qBIL1KqwR449DdP4EflBFVn+dxwnFUFiNWdm7lxfeUWf1/RxwW6u4qKtJNY0vnvGW5JHn1H0mikj8vCD1RLI7qILJCKZqgWj8RA092j0sJrzCaxC53KXCDJF49mM96WejETeF12hRFiHDfNwY32WgvObDot6wj100vQKtB+msy6HbYrvCFlvguWwZQ7IG/gvI4blRPft5Fw4EbemcRt4C8V7orH85pz3iXBpgrhYoz2NR4sN6g3n4NyryJnQl4vdoDkMmn8Ve3TeYh3uHzbvU/oT9Rh8F/w8dPE3WmBRE20E0Kt7+F6+0OUTXS2uDrGyIb+kgJ7H+gMiFUKL6wEAAA=="
    },
    "Metadata": {
     "aws:cdk:path": "CdkStack/CDKMetadata/Default"
