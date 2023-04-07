@@ -98,23 +98,6 @@ export class CdkStack extends cdk.Stack {
       resources: [bucketImg.arnForObjects('*')],
     }));
     
-   
-// Política de acceso para Lambda
-    bucketImg.addToResourcePolicy(new iam.PolicyStatement({
-      effect: iam.Effect.ALLOW,
-      actions: ['s3:GetObject', 's3:DeleteObject', 's3:PutObject'],
-      principals: [new iam.ServicePrincipal('lambda.amazonaws.com')],
-      resources: [bucketImg.arnForObjects('*')],
-    }));
-
-// Política de acceso para CloudFront
-    bucketImg.addToResourcePolicy(new iam.PolicyStatement({
-      effect: iam.Effect.ALLOW,
-      actions: ['s3:GetObject', 's3:DeleteObject', 's3:PutObject'],
-      principals: [new iam.ServicePrincipal('cloudfront.amazonaws.com')],
-      resources: [myBucket.arnForObjects('*')],
-    }));
-
     const oai = new cloudfront.OriginAccessIdentity(this, 'myOAI');
 
     new cloudfront.Distribution(this, 'inventoryFront', {

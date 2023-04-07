@@ -1547,8 +1547,7 @@
                               ],
                               "Effect": "Allow",
                               "Principal": {
-                                "AWS": "*",
-                                "Service": "lambda.amazonaws.com"
+                                "AWS": "*"
                               },
                               "Resource": {
                                 "Fn::Join": [
@@ -1557,31 +1556,6 @@
                                     {
                                       "Fn::GetAtt": [
                                         "imgBucketA8FCDD83",
-                                        "Arn"
-                                      ]
-                                    },
-                                    "/*"
-                                  ]
-                                ]
-                              }
-                            },
-                            {
-                              "Action": [
-                                "s3:DeleteObject",
-                                "s3:GetObject",
-                                "s3:PutObject"
-                              ],
-                              "Effect": "Allow",
-                              "Principal": {
-                                "Service": "cloudfront.amazonaws.com"
-                              },
-                              "Resource": {
-                                "Fn::Join": [
-                                  "",
-                                  [
-                                    {
-                                      "Fn::GetAtt": [
-                                        "inventoryBucketA35F81F0",
                                         "Arn"
                                       ]
                                     },
