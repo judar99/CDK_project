@@ -93,10 +93,11 @@ export class CdkStack extends cdk.Stack {
    
     bucketImg.addToResourcePolicy(new iam.PolicyStatement({
       effect: iam.Effect.ALLOW,
-      actions: ['s3:GetObject', 's3:DeleteObject'],
+      actions: ['s3:GetObject', 's3:DeleteObject','s3:PutObject'],
       principals: [new iam.AnyPrincipal()],
       resources: [bucketImg.arnForObjects('*')],
     }));
+
 
     const oai = new cloudfront.OriginAccessIdentity(this, 'myOAI');
 
