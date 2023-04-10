@@ -126,6 +126,14 @@ export class CdkStack extends cdk.Stack {
       }
     });
     
+    userPool.addDomain('MyUserPoolDomain', {
+      cognitoDomain: {
+        domainPrefix: 'my-app-auth'
+      }
+    });
+
+
+
   }
   
 }

@@ -1738,6 +1738,33 @@
                   "fqn": "aws-cdk-lib.aws_cognito.CfnUserPool",
                   "version": "2.73.0"
                 }
+              },
+              "MyUserPoolDomain": {
+                "id": "MyUserPoolDomain",
+                "path": "CdkStack/UserPool/MyUserPoolDomain",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "CdkStack/UserPool/MyUserPoolDomain/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Cognito::UserPoolDomain",
+                      "aws:cdk:cloudformation:props": {
+                        "domain": "my-app-auth",
+                        "userPoolId": {
+                          "Ref": "UserPool6BA7E5F2"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cognito.CfnUserPoolDomain",
+                      "version": "2.73.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cognito.UserPoolDomain",
+                  "version": "2.73.0"
+                }
               }
             },
             "constructInfo": {

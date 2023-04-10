@@ -1228,10 +1228,22 @@
     "aws:cdk:path": "CdkStack/UserPool/Resource"
    }
   },
+  "UserPoolMyUserPoolDomain60C72AF6": {
+   "Type": "AWS::Cognito::UserPoolDomain",
+   "Properties": {
+    "Domain": "my-app-auth",
+    "UserPoolId": {
+     "Ref": "UserPool6BA7E5F2"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CdkStack/UserPool/MyUserPoolDomain/Resource"
+   }
+  },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/22QTU/DMAyGf8vuWWAbElw3pkkc0KYBZ5QmXvGWxlU+mKoo/5007USROPmx/ea1nSV/XPH7mbi6uVSXucaKxzcv5IXl0mdUnRENqVx8F5UG9nwyBRLToqmU4HEXjPRIpm9N+QC2QedylhiKhscjDe9LPJBG2RVdocREi7XwcBVdloLz6xaLesQttJq6Bozvq5MsL1sX3wGynoKVsBEO2Cv4L1J9c6Rbd3QunJhb8bgJ8gLFe6Qh/O45zROTmoI6WTKex73FGs1aSnDuReWd0JcXz71m12v+VWzReYtVuH3YNM8DqDboiccPB/ZApHvJjVP6c8k++Db46U1lPBmFg5khBfzs7r4XT3zxwJezs0Oc25AXaYAfh/gDL0TDhwoCAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/22QTU/DMAyGf8vuWWAbEly3VZM4oE0DzihNsuItiat8MFVR/jtp2kGROPmx/cZ+nSV9XNH7Gbu6OReXuYKaxlfP+IXk0kcUnWEaRS6+sVpJsj2ZAokopmvBaNwFwz2g6VtTPkirwbmcJQJM03jE4X2JB1TAu6IrlAhroWFeXlmXpdL5dQtFPWIlW4Wdlsb31UmWzTZl7gBZj8FyuWFOkhfpP1H0zZFu3XFy4UTcisZN4BdZZo80hF+f0zwRrjCIk0XjadxbaMCsOZfOPYvsCXx5se01u17zr6IC5y3U4fZh0zwvwMaARxrfnbQHRNVLfvgGFWoGZtoaKin9OXUffBv89OjiD42AYZtBIenZ3X0tnujigS5nZwcwtyE71ZIeh/gNiSVqnCsCAAA="
    },
    "Metadata": {
     "aws:cdk:path": "CdkStack/CDKMetadata/Default"
