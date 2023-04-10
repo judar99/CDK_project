@@ -7,9 +7,11 @@ import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
 import * as s3deploy from 'aws-cdk-lib/aws-s3-deployment';
 import * as apigwv2 from "aws-cdk-lib/aws-apigatewayv2";
+import * as s3 from "aws-cdk-lib/aws-s3";
+import * as cognito from "aws-cdk-lib/aws-cognito";
 const iam = require('aws-cdk-lib/aws-iam');
 const path = require('path');
-import * as s3 from "aws-cdk-lib/aws-s3";
+
 
 export class CdkStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -109,6 +111,21 @@ export class CdkStack extends cdk.Stack {
       },
       defaultRootObject:'index.html'
     });
+
+    const userPool = new cognito.UserPool(this, 'UserPool', {
+      userPoolName: 'myUserPoolName',
+      selfSignUpEnabled: false, // Para deshabilitar el registro de usuarios
+      autoVerify: { email: true }, // Para verificar automáticamente la dirección de correo electrónico de los usuarios
+      signInAliases: { email: true }, // Para permitir que los usuarios inicien sesión con su correo electrónico
+      passwordPolicy: {
+        minLength: 8,
+        requireLowercase: true,
+        requireDigits: true,
+        requireSymbols: false,
+        requireUppercase: true
+      }
+    });
+    
   }
   
 }

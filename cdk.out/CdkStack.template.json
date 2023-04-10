@@ -1178,10 +1178,60 @@
     "aws:cdk:path": "CdkStack/inventoryFront/Resource"
    }
   },
+  "UserPool6BA7E5F2": {
+   "Type": "AWS::Cognito::UserPool",
+   "Properties": {
+    "AccountRecoverySetting": {
+     "RecoveryMechanisms": [
+      {
+       "Name": "verified_phone_number",
+       "Priority": 1
+      },
+      {
+       "Name": "verified_email",
+       "Priority": 2
+      }
+     ]
+    },
+    "AdminCreateUserConfig": {
+     "AllowAdminCreateUserOnly": true
+    },
+    "AutoVerifiedAttributes": [
+     "email"
+    ],
+    "EmailVerificationMessage": "The verification code to your new account is {####}",
+    "EmailVerificationSubject": "Verify your new account",
+    "Policies": {
+     "PasswordPolicy": {
+      "MinimumLength": 8,
+      "RequireLowercase": true,
+      "RequireNumbers": true,
+      "RequireSymbols": false,
+      "RequireUppercase": true
+     }
+    },
+    "SmsVerificationMessage": "The verification code to your new account is {####}",
+    "UsernameAttributes": [
+     "email"
+    ],
+    "UserPoolName": "myUserPoolName",
+    "VerificationMessageTemplate": {
+     "DefaultEmailOption": "CONFIRM_WITH_CODE",
+     "EmailMessage": "The verification code to your new account is {####}",
+     "EmailSubject": "Verify your new account",
+     "SmsMessage": "The verification code to your new account is {####}"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "CdkStack/UserPool/Resource"
+   }
+  },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/22Qy07DMBBFv6V7x9AWCbZ9qBIL1KqwR449DdP4EflBFVn+dxwnFUFiNWdm7lxfeUWf1/RxwW6u4qKtJNY0vnvGW5JHn1H0mikj8vCD1RLI7qILJCKZqgWj8RA092j0sJrzCaxC53KXCDJF49mM96WejETeF12hRFiHDfNwY32WgvObDot6wj100vQKtB+msy6HbYrvCFlvguWwZQ7IG/gvI4blRPft5Fw4EbemcRt4C8V7orH85pz3iXBpgrhYoz2NR4sN6g3n4NyryJnQl4vdoDkMmn8Ve3TeYh3uHzbvU/oT9Rh8F/w8dPE3WmBRE20E0Kt7+F6+0OUTXS2uDrGyIb+kgJ7H+gMiFUKL6wEAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/22QTU/DMAyGf8vuWWAbElw3pkkc0KYBZ5QmXvGWxlU+mKoo/5007USROPmx/ea1nSV/XPH7mbi6uVSXucaKxzcv5IXl0mdUnRENqVx8F5UG9nwyBRLToqmU4HEXjPRIpm9N+QC2QedylhiKhscjDe9LPJBG2RVdocREi7XwcBVdloLz6xaLesQttJq6Bozvq5MsL1sX3wGynoKVsBEO2Cv4L1J9c6Rbd3QunJhb8bgJ8gLFe6Qh/O45zROTmoI6WTKex73FGs1aSnDuReWd0JcXz71m12v+VWzReYtVuH3YNM8DqDboiccPB/ZApHvJjVP6c8k++Db46U1lPBmFg5khBfzs7r4XT3zxwJezs0Oc25AXaYAfh/gDL0TDhwoCAAA="
    },
    "Metadata": {
     "aws:cdk:path": "CdkStack/CDKMetadata/Default"
