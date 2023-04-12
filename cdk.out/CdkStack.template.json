@@ -1214,7 +1214,7 @@
     "UsernameAttributes": [
      "email"
     ],
-    "UserPoolName": "myUserPoolName",
+    "UserPoolName": "UserPoolInvetory",
     "VerificationMessageTemplate": {
      "DefaultEmailOption": "CONFIRM_WITH_CODE",
      "EmailMessage": "The verification code to your new account is {####}",
@@ -1231,7 +1231,7 @@
   "UserPoolMyUserPoolDomain60C72AF6": {
    "Type": "AWS::Cognito::UserPoolDomain",
    "Properties": {
-    "Domain": "my-app-auth",
+    "Domain": "inventory-auth",
     "UserPoolId": {
      "Ref": "UserPool6BA7E5F2"
     }
@@ -1240,10 +1240,48 @@
     "aws:cdk:path": "CdkStack/UserPool/MyUserPoolDomain/Resource"
    }
   },
+  "UserPoolClient2F5918F7": {
+   "Type": "AWS::Cognito::UserPoolClient",
+   "Properties": {
+    "UserPoolId": {
+     "Ref": "UserPool6BA7E5F2"
+    },
+    "AllowedOAuthFlows": [
+     "implicit",
+     "code"
+    ],
+    "AllowedOAuthFlowsUserPoolClient": true,
+    "AllowedOAuthScopes": [
+     "profile",
+     "phone",
+     "email",
+     "openid",
+     "aws.cognito.signin.user.admin"
+    ],
+    "CallbackURLs": [
+     "https://d14vf7jze9u0j0.cloudfront.net/?code=b5ad2157-de34-46e6-8597-2a133f523f31"
+    ],
+    "ExplicitAuthFlows": [
+     "ALLOW_USER_PASSWORD_AUTH",
+     "ALLOW_REFRESH_TOKEN_AUTH"
+    ],
+    "GenerateSecret": false,
+    "LogoutURLs": [
+     "https://my-cloudfront-distribution.cloudfront.net/logout"
+    ],
+    "PreventUserExistenceErrors": "ENABLED",
+    "SupportedIdentityProviders": [
+     "COGNITO"
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "CdkStack/UserPoolClient/Resource"
+   }
+  },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/22QTU/DMAyGf8vuWWAbEly3VZM4oE0DzihNsuItiat8MFVR/jtp2kGROPmx/cZ+nSV9XNH7Gbu6OReXuYKaxlfP+IXk0kcUnWEaRS6+sVpJsj2ZAokopmvBaNwFwz2g6VtTPkirwbmcJQJM03jE4X2JB1TAu6IrlAhroWFeXlmXpdL5dQtFPWIlW4Wdlsb31UmWzTZl7gBZj8FyuWFOkhfpP1H0zZFu3XFy4UTcisZN4BdZZo80hF+f0zwRrjCIk0XjadxbaMCsOZfOPYvsCXx5se01u17zr6IC5y3U4fZh0zwvwMaARxrfnbQHRNVLfvgGFWoGZtoaKin9OXUffBv89OjiD42AYZtBIenZ3X0tnujigS5nZwcwtyE71ZIeh/gNiSVqnCsCAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/22QTU/DMAyGf8vuWWAbElz3oUkc0KYBZ5QmWfGWxFU+mKoo/500baFInPz49RvH9pI+ruj9jN3cnIvrXEFF46tn/Eqy9BFFa5hGkcU3VilJtmdTIBHFdCUYjftguAc0XWnKR2k1OJezRIBpGk/Yvy/xiAp4W3yFEmEN1MzLG2uzVTq/bqC4B9zJRmGrpfGdOsnysHXp20P2Y7BcbpiT5EX6TxRdcaCxOnQunIhb0bgJ/CpL74H68DvnNE+EKwzibNF4Gg8WajBrzqVzzyLPBL682Haefef517ED5y1UYTzYNM8fYG3AI43vTtojouosPzzCDjUDMy0NyphuFQwn+6uk9OcWh+Cb4KdXKQugEdCPY1BIenF3X4snunigy9nFAcxtyKtoSU99/AZWPRBATAIAAA=="
    },
    "Metadata": {
     "aws:cdk:path": "CdkStack/CDKMetadata/Default"

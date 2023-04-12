@@ -113,7 +113,7 @@ export class CdkStack extends cdk.Stack {
     });
 
     const userPool = new cognito.UserPool(this, 'UserPool', {
-      userPoolName: 'myUserPoolName',
+      userPoolName: 'UserPoolInvetory',
       selfSignUpEnabled: false, // Para deshabilitar el registro de usuarios
       autoVerify: { email: true }, // Para verificar automáticamente la dirección de correo electrónico de los usuarios
       signInAliases: { email: true }, // Para permitir que los usuarios inicien sesión con su correo electrónico
@@ -128,11 +128,33 @@ export class CdkStack extends cdk.Stack {
     
     userPool.addDomain('MyUserPoolDomain', {
       cognitoDomain: {
-        domainPrefix: 'my-app-auth'
+        domainPrefix: 'inventory-auth'
       }
     });
 
-
+    const userPoolClient = new cognito.UserPoolClient(this, 'UserPoolClient', {
+      userPool: userPool,
+      authFlows: { 
+        userPassword: true 
+      },
+      preventUserExistenceErrors: true,
+      generateSecret: false,
+      supportedIdentityProviders: [
+        cognito.UserPoolClientIdentityProvider.COGNITO
+      ],
+      oAuth: {
+        flows: {
+          authorizationCodeGrant: true,
+          implicitCodeGrant: true
+        },
+        callbackUrls: [
+          'https://d14vf7jze9u0j0.cloudfront.net/?code=b5ad2157-de34-46e6-8597-2a133f523f31'
+        ],
+        logoutUrls: [
+          'https://my-cloudfront-distribution.cloudfront.net/logout'
+        ]
+      }
+    });
 
   }
   
