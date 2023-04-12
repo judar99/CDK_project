@@ -113,7 +113,7 @@ export class CdkStack extends cdk.Stack {
     });
 
     const userPool = new cognito.UserPool(this, 'UserPool', {
-      userPoolName: 'UserPoolInvetory',
+      userPoolName: 'myUserPoolName',
       selfSignUpEnabled: false, // Para deshabilitar el registro de usuarios
       autoVerify: { email: true }, // Para verificar automáticamente la dirección de correo electrónico de los usuarios
       signInAliases: { email: true }, // Para permitir que los usuarios inicien sesión con su correo electrónico

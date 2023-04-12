@@ -1725,7 +1725,7 @@
                     "usernameAttributes": [
                       "email"
                     ],
-                    "userPoolName": "UserPoolInvetory",
+                    "userPoolName": "myUserPoolName",
                     "verificationMessageTemplate": {
                       "defaultEmailOption": "CONFIRM_WITH_CODE",
                       "emailMessage": "The verification code to your new account is {####}",
