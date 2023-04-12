@@ -128,7 +128,7 @@ export class CdkStack extends cdk.Stack {
     
     userPool.addDomain('MyUserPoolDomain', {
       cognitoDomain: {
-        domainPrefix: 'inventory-auth'
+        domainPrefix: 'my-app-auth'
       }
     });
 

@@ -1749,7 +1749,7 @@
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::Cognito::UserPoolDomain",
                       "aws:cdk:cloudformation:props": {
-                        "domain": "inventory-auth",
+                        "domain": "my-app-auth",
                         "userPoolId": {
                           "Ref": "UserPool6BA7E5F2"
                         }

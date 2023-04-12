@@ -1231,7 +1231,7 @@
   "UserPoolMyUserPoolDomain60C72AF6": {
    "Type": "AWS::Cognito::UserPoolDomain",
    "Properties": {
-    "Domain": "inventory-auth",
+    "Domain": "my-app-auth",
     "UserPoolId": {
      "Ref": "UserPool6BA7E5F2"
     }
