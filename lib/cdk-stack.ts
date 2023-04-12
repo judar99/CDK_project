@@ -102,7 +102,59 @@ export class CdkStack extends cdk.Stack {
     
     const oai = new cloudfront.OriginAccessIdentity(this, 'myOAI');
 
+    new cloudfront.Distribution(this, 'inventoryFront', {
+      defaultBehavior: { 
+        origin: new origins.S3Origin(myBucket, {
+          originPath: '/html',
+          originAccessIdentity: oai,
+        })
+      },
+      defaultRootObject:'index.html'
+    });
+
+    const userPool = new cognito.UserPool(this, 'UserPool', {
+      userPoolName: 'myUserPoolName',
+      selfSignUpEnabled: false, // Para deshabilitar el registro de usuarios
+      autoVerify: { email: true }, // Para verificar automáticamente la dirección de correo electrónico de los usuarios
+      signInAliases: { email: true }, // Para permitir que los usuarios inicien sesión con su correo electrónico
+      passwordPolicy: {
+        minLength: 8,
+        requireLowercase: true,
+        requireDigits: true,
+        requireSymbols: false,
+        requireUppercase: true
+      }
+    });
     
+    userPool.addDomain('MyUserPoolDomain', {
+      cognitoDomain: {
+        domainPrefix: 'my-app-auth'
+      }
+    });
+
+    const userPoolClient = new cognito.UserPoolClient(this, 'UserPoolClient', {
+      userPool: userPool,
+      authFlows: { 
+        userPassword: true 
+      },
+      preventUserExistenceErrors: true,
+      generateSecret: false,
+      supportedIdentityProviders: [
+        cognito.UserPoolClientIdentityProvider.COGNITO
+      ],
+      oAuth: {
+        flows: {
+          authorizationCodeGrant: true,
+          implicitCodeGrant: true
+        },
+        callbackUrls: [
+          'https://${inventoryFront.distributionDomainName}/oauth2/idpresponse'
+        ],
+        logoutUrls: [
+          'https://my-cloudfront-distribution.cloudfront.net/logout'
+        ]
+      }
+    });
 
   }
   

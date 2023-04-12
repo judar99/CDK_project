@@ -1041,7 +1041,13 @@
        "Action": "s3:GetObject",
        "Effect": "Allow",
        "Principal": {
-        "AWS": "*"
+        "AWS": "*",
+        "CanonicalUser": {
+         "Fn::GetAtt": [
+          "myOAI726DB750",
+          "S3CanonicalUserId"
+         ]
+        }
        },
        "Resource": {
         "Fn::Join": [
@@ -1127,10 +1133,155 @@
     "aws:cdk:path": "CdkStack/myOAI/Resource"
    }
   },
+  "inventoryFront9AE85105": {
+   "Type": "AWS::CloudFront::Distribution",
+   "Properties": {
+    "DistributionConfig": {
+     "DefaultCacheBehavior": {
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "Compress": true,
+      "TargetOriginId": "CdkStackinventoryFrontOrigin110573FEE",
+      "ViewerProtocolPolicy": "allow-all"
+     },
+     "DefaultRootObject": "index.html",
+     "Enabled": true,
+     "HttpVersion": "http2",
+     "IPV6Enabled": true,
+     "Origins": [
+      {
+       "DomainName": {
+        "Fn::GetAtt": [
+         "inventoryBucketA35F81F0",
+         "RegionalDomainName"
+        ]
+       },
+       "Id": "CdkStackinventoryFrontOrigin110573FEE",
+       "OriginPath": "/html",
+       "S3OriginConfig": {
+        "OriginAccessIdentity": {
+         "Fn::Join": [
+          "",
+          [
+           "origin-access-identity/cloudfront/",
+           {
+            "Ref": "myOAI726DB750"
+           }
+          ]
+         ]
+        }
+       }
+      }
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CdkStack/inventoryFront/Resource"
+   }
+  },
+  "UserPool6BA7E5F2": {
+   "Type": "AWS::Cognito::UserPool",
+   "Properties": {
+    "AccountRecoverySetting": {
+     "RecoveryMechanisms": [
+      {
+       "Name": "verified_phone_number",
+       "Priority": 1
+      },
+      {
+       "Name": "verified_email",
+       "Priority": 2
+      }
+     ]
+    },
+    "AdminCreateUserConfig": {
+     "AllowAdminCreateUserOnly": true
+    },
+    "AutoVerifiedAttributes": [
+     "email"
+    ],
+    "EmailVerificationMessage": "The verification code to your new account is {####}",
+    "EmailVerificationSubject": "Verify your new account",
+    "Policies": {
+     "PasswordPolicy": {
+      "MinimumLength": 8,
+      "RequireLowercase": true,
+      "RequireNumbers": true,
+      "RequireSymbols": false,
+      "RequireUppercase": true
+     }
+    },
+    "SmsVerificationMessage": "The verification code to your new account is {####}",
+    "UsernameAttributes": [
+     "email"
+    ],
+    "UserPoolName": "myUserPoolName",
+    "VerificationMessageTemplate": {
+     "DefaultEmailOption": "CONFIRM_WITH_CODE",
+     "EmailMessage": "The verification code to your new account is {####}",
+     "EmailSubject": "Verify your new account",
+     "SmsMessage": "The verification code to your new account is {####}"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "CdkStack/UserPool/Resource"
+   }
+  },
+  "UserPoolMyUserPoolDomain60C72AF6": {
+   "Type": "AWS::Cognito::UserPoolDomain",
+   "Properties": {
+    "Domain": "my-app-auth",
+    "UserPoolId": {
+     "Ref": "UserPool6BA7E5F2"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CdkStack/UserPool/MyUserPoolDomain/Resource"
+   }
+  },
+  "UserPoolClient2F5918F7": {
+   "Type": "AWS::Cognito::UserPoolClient",
+   "Properties": {
+    "UserPoolId": {
+     "Ref": "UserPool6BA7E5F2"
+    },
+    "AllowedOAuthFlows": [
+     "implicit",
+     "code"
+    ],
+    "AllowedOAuthFlowsUserPoolClient": true,
+    "AllowedOAuthScopes": [
+     "profile",
+     "phone",
+     "email",
+     "openid",
+     "aws.cognito.signin.user.admin"
+    ],
+    "CallbackURLs": [
+     "https://${inventoryFront.distributionDomainName}/oauth2/idpresponse"
+    ],
+    "ExplicitAuthFlows": [
+     "ALLOW_USER_PASSWORD_AUTH",
+     "ALLOW_REFRESH_TOKEN_AUTH"
+    ],
+    "GenerateSecret": false,
+    "LogoutURLs": [
+     "https://my-cloudfront-distribution.cloudfront.net/logout"
+    ],
+    "PreventUserExistenceErrors": "ENABLED",
+    "SupportedIdentityProviders": [
+     "COGNITO"
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "CdkStack/UserPoolClient/Resource"
+   }
+  },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/22QT0/DMAzFP8vuWWAbEly3oUkc0KbBHaWJV7zmT9UkTFWU707qFlEkTv7Zfn568po/bvj9Qtz8UqpmqbHi6S0I2bAy+kiqt8I4VYbvotLA9hdLkJkWplKCp0O0MqCzw2rOJ+gMel+6zFAYns5uvKd6chplTzqizESLtQhwE32Rgg/bFkk94TO02vUGbBims66Ercl3hKJ3sZOwEx7YK4RPp4blRD/byZk4M7/haRdlA+Q90Vh+c877zKR2UV06ZwNPxw5rtFspwfsXVTJhoIv9oDkMmv8UOf9Jc4yhjWGeiyycVRjoh9Yp4Fd/97V64qsHvl5cPeKyi8XMAD+P9RveW6EozgEAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/22QTU/DMAyGf8vuWWAbElz3oUkc0KYBZ5QmWfGWxFU+mKoo/500baFInPz49RvH9pI+ruj9jN3cnIvrXEFF46tn/Eqy9BFFa5hGkcU3VilJtmdTIBHFdCUYjftguAc0XWnKR2k1OJezRIBpGk/Yvy/xiAp4W3yFEmEN1MzLG2uzVTq/bqC4B9zJRmGrpfGdOsnysHXp20P2Y7BcbpiT5EX6TxRdcaCxOnQunIhb0bgJ/CpL74H68DvnNE+EKwzibNF4Gg8WajBrzqVzzyLPBL682Haefef517ED5y1UYTzYNM8fYG3AI43vTtojouosPzzCDjUDMy0NyphuFQwn+6uk9OcWh+Cb4KdXKQugEdCPY1BIenF3X4snunigy9nFAcxtyKtoSU99/AZWPRBATAIAAA=="
    },
    "Metadata": {
     "aws:cdk:path": "CdkStack/CDKMetadata/Default"
