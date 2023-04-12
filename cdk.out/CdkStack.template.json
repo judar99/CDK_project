@@ -1133,15 +1133,28 @@
     "aws:cdk:path": "CdkStack/myOAI/Resource"
    }
   },
-  "inventoryFront9AE85105": {
+  "inventoryFrontCFDistribution5D3DB4DB": {
    "Type": "AWS::CloudFront::Distribution",
    "Properties": {
     "DistributionConfig": {
      "DefaultCacheBehavior": {
-      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "AllowedMethods": [
+       "GET",
+       "HEAD"
+      ],
+      "CachedMethods": [
+       "GET",
+       "HEAD"
+      ],
       "Compress": true,
-      "TargetOriginId": "CdkStackinventoryFrontOrigin110573FEE",
-      "ViewerProtocolPolicy": "allow-all"
+      "ForwardedValues": {
+       "Cookies": {
+        "Forward": "none"
+       },
+       "QueryString": false
+      },
+      "TargetOriginId": "origin1",
+      "ViewerProtocolPolicy": "redirect-to-https"
      },
      "DefaultRootObject": "index.html",
      "Enabled": true,
@@ -1149,14 +1162,15 @@
      "IPV6Enabled": true,
      "Origins": [
       {
+       "ConnectionAttempts": 3,
+       "ConnectionTimeout": 10,
        "DomainName": {
         "Fn::GetAtt": [
          "inventoryBucketA35F81F0",
          "RegionalDomainName"
         ]
        },
-       "Id": "CdkStackinventoryFrontOrigin110573FEE",
-       "OriginPath": "/html",
+       "Id": "origin1",
        "S3OriginConfig": {
         "OriginAccessIdentity": {
          "Fn::Join": [
@@ -1171,11 +1185,15 @@
         }
        }
       }
-     ]
+     ],
+     "PriceClass": "PriceClass_100",
+     "ViewerCertificate": {
+      "CloudFrontDefaultCertificate": true
+     }
     }
    },
    "Metadata": {
-    "aws:cdk:path": "CdkStack/inventoryFront/Resource"
+    "aws:cdk:path": "CdkStack/inventoryFront/CFDistribution"
    }
   },
   "UserPool6BA7E5F2": {
@@ -1281,7 +1299,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/22QTU/DMAyGf8vuWWAbElz3oUkc0KYBZ5QmWfGWxFU+mKoo/500baFInPz49RvH9pI+ruj9jN3cnIvrXEFF46tn/Eqy9BFFa5hGkcU3VilJtmdTIBHFdCUYjftguAc0XWnKR2k1OJezRIBpGk/Yvy/xiAp4W3yFEmEN1MzLG2uzVTq/bqC4B9zJRmGrpfGdOsnysHXp20P2Y7BcbpiT5EX6TxRdcaCxOnQunIhb0bgJ/CpL74H68DvnNE+EKwzibNF4Gg8WajBrzqVzzyLPBL682Haefef517ED5y1UYTzYNM8fYG3AI43vTtojouosPzzCDjUDMy0NyphuFQwn+6uk9OcWh+Cb4KdXKQugEdCPY1BIenF3X4snunigy9nFAcxtyKtoSU99/AZWPRBATAIAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/21QS2/CMAz+LdxDNmDSduUhpB0mENu045QmpjOkcdUkQ1XU/740bVmROPl7xbE9588L/jgRFzuV6jzVmPHw7oQ8syh9B1UbUZCK4ofINLD10STQMC2KTAkett5Ih2Raa4z3UBVobWQNQ1HwcKDufap70ijrlEuoYaLEXDi4iDpGwbpliSndww2UmuoCjGvVEYvD5qlvB2KefCVhJSywN3A/pFqzR4Pbd064YXbBw8rLM6TePerK/5xj3jCpyatjRcbxsKswR7OUEqx9VXEmdOnFus1s28z9xNX+gmyD1lWY+eF6Yx5/o9ygIx4+LVR7It1GrngAGyoEmrHVKwNda+zvd6s0zc1hdt6V3o1PlLYho7Abx5ACfrIPv7MXPnvi88nJIk4rH/cqgB+6+gfZbRPvWQIAAA=="
    },
    "Metadata": {
     "aws:cdk:path": "CdkStack/CDKMetadata/Default"

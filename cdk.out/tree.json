@@ -1617,32 +1617,27 @@
             "id": "inventoryFront",
             "path": "CdkStack/inventoryFront",
             "children": {
-              "Origin1": {
-                "id": "Origin1",
-                "path": "CdkStack/inventoryFront/Origin1",
-                "constructInfo": {
-                  "fqn": "constructs.Construct",
-                  "version": "10.1.280"
-                }
-              },
-              "Resource": {
-                "id": "Resource",
-                "path": "CdkStack/inventoryFront/Resource",
+              "CFDistribution": {
+                "id": "CFDistribution",
+                "path": "CdkStack/inventoryFront/CFDistribution",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::CloudFront::Distribution",
                   "aws:cdk:cloudformation:props": {
                     "distributionConfig": {
                       "enabled": true,
+                      "defaultRootObject": "index.html",
+                      "httpVersion": "http2",
+                      "priceClass": "PriceClass_100",
+                      "ipv6Enabled": true,
                       "origins": [
                         {
+                          "id": "origin1",
                           "domainName": {
                             "Fn::GetAtt": [
                               "inventoryBucketA35F81F0",
                               "RegionalDomainName"
                             ]
                           },
-                          "id": "CdkStackinventoryFrontOrigin110573FEE",
-                          "originPath": "/html",
                           "s3OriginConfig": {
                             "originAccessIdentity": {
                               "Fn::Join": [
@@ -1655,19 +1650,33 @@
                                 ]
                               ]
                             }
-                          }
+                          },
+                          "connectionAttempts": 3,
+                          "connectionTimeout": 10
                         }
                       ],
                       "defaultCacheBehavior": {
-                        "pathPattern": "*",
-                        "targetOriginId": "CdkStackinventoryFrontOrigin110573FEE",
-                        "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+                        "allowedMethods": [
+                          "GET",
+                          "HEAD"
+                        ],
+                        "cachedMethods": [
+                          "GET",
+                          "HEAD"
+                        ],
                         "compress": true,
-                        "viewerProtocolPolicy": "allow-all"
+                        "forwardedValues": {
+                          "queryString": false,
+                          "cookies": {
+                            "forward": "none"
+                          }
+                        },
+                        "targetOriginId": "origin1",
+                        "viewerProtocolPolicy": "redirect-to-https"
                       },
-                      "defaultRootObject": "index.html",
-                      "httpVersion": "http2",
-                      "ipv6Enabled": true
+                      "viewerCertificate": {
+                        "cloudFrontDefaultCertificate": true
+                      }
                     }
                   }
                 },
@@ -1678,7 +1687,7 @@
               }
             },
             "constructInfo": {
-              "fqn": "aws-cdk-lib.aws_cloudfront.Distribution",
+              "fqn": "aws-cdk-lib.aws_cloudfront.CloudFrontWebDistribution",
               "version": "2.73.0"
             }
           },

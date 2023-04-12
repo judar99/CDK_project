@@ -102,14 +102,19 @@ export class CdkStack extends cdk.Stack {
     
     const oai = new cloudfront.OriginAccessIdentity(this, 'myOAI');
 
-    new cloudfront.Distribution(this, 'inventoryFront', {
-      defaultBehavior: { 
-        origin: new origins.S3Origin(myBucket, {
-          originPath: '/html',
-          originAccessIdentity: oai,
-        })
-      },
-      defaultRootObject:'index.html'
+    const inventoryFront = new cloudfront.CloudFrontWebDistribution(this, 'inventoryFront', {
+      originConfigs: [
+        {
+          s3OriginSource: {
+            s3BucketSource: myBucket,
+            originAccessIdentity: oai
+          },
+          behaviors: [
+            { isDefaultBehavior: true }
+          ]
+        }
+      ],
+      defaultRootObject: 'index.html'
     });
 
     const userPool = new cognito.UserPool(this, 'UserPool', {

@@ -17,7 +17,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/0f5780485613bd903f3811e31bf17a1068f1eed9e367ca3e9b6bdd6d788be3cb.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/438e47bcedc3e2a1f75cea8f521bcf54e6a379e4b032cc64b4594625b3411acc.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -243,10 +243,10 @@
             "data": "myOAI726DB750"
           }
         ],
-        "/CdkStack/inventoryFront/Resource": [
+        "/CdkStack/inventoryFront/CFDistribution": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "inventoryFront9AE85105"
+            "data": "inventoryFrontCFDistribution5D3DB4DB"
           }
         ],
         "/CdkStack/UserPool/Resource": [
