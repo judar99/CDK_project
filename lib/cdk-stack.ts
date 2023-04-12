@@ -107,6 +107,7 @@ export class CdkStack extends cdk.Stack {
         {
           s3OriginSource: {
             s3BucketSource: myBucket,
+            originPath: '/html',
             originAccessIdentity: oai
           },
           behaviors: [

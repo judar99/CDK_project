@@ -1638,6 +1638,7 @@
                               "RegionalDomainName"
                             ]
                           },
+                          "originPath": "/html",
                           "s3OriginConfig": {
                             "originAccessIdentity": {
                               "Fn::Join": [

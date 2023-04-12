@@ -1171,6 +1171,7 @@
         ]
        },
        "Id": "origin1",
+       "OriginPath": "/html",
        "S3OriginConfig": {
         "OriginAccessIdentity": {
          "Fn::Join": [
