@@ -1812,6 +1812,7 @@
                         "Fn::Join": [
                           "",
                           [
+                            "https://",
                             {
                               "Fn::GetAtt": [
                                 "inventoryFrontCFDistribution5D3DB4DB",
