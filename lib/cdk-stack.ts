@@ -154,16 +154,13 @@ export class CdkStack extends cdk.Stack {
           implicitCodeGrant: true
         },
         callbackUrls: [
-          `https://${inventoryFront.distributionDomainName}/oauth2/idpresponse`
+          `https://${inventoryFront.distributionDomainName}`
         ],
         logoutUrls: [
           'https://my-cloudfront-distribution.cloudfront.net/logout'
         ]
       }
     });
-
-
-    
 
   }
   

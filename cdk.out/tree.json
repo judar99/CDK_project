@@ -1818,8 +1818,7 @@
                                 "inventoryFrontCFDistribution5D3DB4DB",
                                 "DomainName"
                               ]
-                            },
-                            "/oauth2/idpresponse"
+                            }
                           ]
                         ]
                       }
