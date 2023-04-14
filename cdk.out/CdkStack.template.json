@@ -1149,10 +1149,19 @@
       "Compress": true,
       "ForwardedValues": {
        "Cookies": {
-        "Forward": "none"
+        "Forward": "all"
        },
-       "QueryString": false
+       "Headers": [
+        "Authorization"
+       ],
+       "QueryString": true
       },
+      "LambdaFunctionAssociations": [
+       {
+        "EventType": "viewer-request",
+        "LambdaFunctionARN": "arn:aws:lambda:us-east-1:123456789012:function:MyViewerRequestFunction"
+       }
+      ],
       "TargetOriginId": "origin1",
       "ViewerProtocolPolicy": "redirect-to-https"
      },
@@ -1288,8 +1297,7 @@
           "inventoryFrontCFDistribution5D3DB4DB",
           "DomainName"
          ]
-        },
-        "/oauth2/idpresponse"
+        }
        ]
       ]
      }

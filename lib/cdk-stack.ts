@@ -138,6 +138,24 @@ export class CdkStack extends cdk.Stack {
       }
     });
 
+    const distributionConfig = inventoryFront.node.defaultChild as cloudfront.CfnDistribution;
+    distributionConfig.addPropertyOverride('DistributionConfig.DefaultCacheBehavior.ForwardedValues', {
+      QueryString: true,
+      Cookies: {
+        Forward: 'all',
+      },
+      Headers: [
+        'Authorization',
+      ],
+    });
+
+    distributionConfig.addPropertyOverride('DistributionConfig.DefaultCacheBehavior.LambdaFunctionAssociations', [
+      {
+        EventType: 'viewer-request',
+        LambdaFunctionARN: 'arn:aws:lambda:us-east-1:123456789012:function:MyViewerRequestFunction',
+      },
+    ]);
+
     const userPoolClient = new cognito.UserPoolClient(this, 'UserPoolClient', {
       userPool: userPool,
       authFlows: { 
@@ -154,13 +172,16 @@ export class CdkStack extends cdk.Stack {
           implicitCodeGrant: true
         },
         callbackUrls: [
-          `https://${inventoryFront.distributionDomainName}/oauth2/idpresponse`
+          `https://${inventoryFront.distributionDomainName}`
         ],
         logoutUrls: [
           'https://my-cloudfront-distribution.cloudfront.net/logout'
         ]
       }
     });
+
+
+    
 
   }
   
